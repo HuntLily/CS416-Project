@@ -28,6 +28,8 @@ namespace GUI
                 {
                     if(dialog.FileName.EndsWith(".csv"))
                     {
+                        System.IO.FileInfo fileName = new System.IO.FileInfo(dialog.FileName);
+                        displayCSVText.Text = fileName.Name;
                         MessageBox.Show("works");
                         return;
                     }
@@ -52,7 +54,12 @@ namespace GUI
         private void helpButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("To import a csv file press the import button which will open up your file explorer, To " +
-                "calculate the press the calculate button");
+                "to enter a p-value click on the text area and add your p-value. To calculate press the calculate butotn.");
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

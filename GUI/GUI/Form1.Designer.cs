@@ -28,84 +28,88 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.importCSVButton = new System.Windows.Forms.Button();
+            this.calculateButton = new System.Windows.Forms.Button();
+            this.titleText = new System.Windows.Forms.Label();
+            this.yourCSVText = new System.Windows.Forms.Label();
+            this.enterPText = new System.Windows.Forms.Label();
+            this.displayCSVText = new System.Windows.Forms.TextBox();
+            this.pvalText = new System.Windows.Forms.TextBox();
             this.helpButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // importCSVButton
             // 
-            this.button1.Location = new System.Drawing.Point(38, 364);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 33);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Import CSV File";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.importCSVButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.importCSVButton.Location = new System.Drawing.Point(485, 325);
+            this.importCSVButton.Name = "importCSVButton";
+            this.importCSVButton.Size = new System.Drawing.Size(138, 33);
+            this.importCSVButton.TabIndex = 0;
+            this.importCSVButton.Text = "Import CSV File";
+            this.importCSVButton.UseVisualStyleBackColor = true;
+            this.importCSVButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // calculateButton
             // 
-            this.button2.Location = new System.Drawing.Point(485, 364);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 33);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Calculate";
-            this.button2.UseVisualStyleBackColor = true;
+            this.calculateButton.Location = new System.Drawing.Point(485, 385);
+            this.calculateButton.Name = "calculateButton";
+            this.calculateButton.Size = new System.Drawing.Size(138, 33);
+            this.calculateButton.TabIndex = 1;
+            this.calculateButton.Text = "Calculate";
+            this.calculateButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // titleText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Garamond", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(206, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(274, 39);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Chi Squared Test";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleText.AutoSize = true;
+            this.titleText.Font = new System.Drawing.Font("Garamond", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.titleText.Location = new System.Drawing.Point(206, 9);
+            this.titleText.Name = "titleText";
+            this.titleText.Size = new System.Drawing.Size(274, 39);
+            this.titleText.TabIndex = 2;
+            this.titleText.Text = "Chi Squared Test";
+            this.titleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // yourCSVText
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Garamond", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(71, 146);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(223, 27);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Your CSV FIle Name:";
+            this.yourCSVText.AutoSize = true;
+            this.yourCSVText.Font = new System.Drawing.Font("Garamond", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yourCSVText.Location = new System.Drawing.Point(71, 146);
+            this.yourCSVText.Name = "yourCSVText";
+            this.yourCSVText.Size = new System.Drawing.Size(223, 27);
+            this.yourCSVText.TabIndex = 3;
+            this.yourCSVText.Text = "Your CSV FIle Name:";
             // 
-            // label3
+            // enterPText
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Garamond", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(131, 230);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(163, 27);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Enter a P-value:";
+            this.enterPText.AutoSize = true;
+            this.enterPText.Font = new System.Drawing.Font("Garamond", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enterPText.Location = new System.Drawing.Point(131, 230);
+            this.enterPText.Name = "enterPText";
+            this.enterPText.Size = new System.Drawing.Size(163, 27);
+            this.enterPText.TabIndex = 4;
+            this.enterPText.Text = "Enter a P-value:";
             // 
-            // textBox1
+            // displayCSVText
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(300, 153);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(129, 20);
-            this.textBox1.TabIndex = 5;
+            this.displayCSVText.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.displayCSVText.Enabled = false;
+            this.displayCSVText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayCSVText.Location = new System.Drawing.Point(300, 153);
+            this.displayCSVText.Name = "displayCSVText";
+            this.displayCSVText.Size = new System.Drawing.Size(129, 22);
+            this.displayCSVText.TabIndex = 5;
             // 
-            // textBox2
+            // pvalText
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBox2.Location = new System.Drawing.Point(304, 237);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(125, 20);
-            this.textBox2.TabIndex = 6;
+            this.pvalText.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pvalText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pvalText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.pvalText.Location = new System.Drawing.Point(304, 237);
+            this.pvalText.Name = "pvalText";
+            this.pvalText.Size = new System.Drawing.Size(125, 22);
+            this.pvalText.TabIndex = 6;
             // 
             // helpButton
             // 
@@ -119,19 +123,32 @@
             this.helpButton.UseVisualStyleBackColor = true;
             this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
             // 
+            // exitButton
+            // 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.exitButton.Location = new System.Drawing.Point(12, 385);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(138, 33);
+            this.exitButton.TabIndex = 8;
+            this.exitButton.Text = "Exit";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // chiSquared
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.helpButton);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pvalText);
+            this.Controls.Add(this.displayCSVText);
+            this.Controls.Add(this.enterPText);
+            this.Controls.Add(this.yourCSVText);
+            this.Controls.Add(this.titleText);
+            this.Controls.Add(this.calculateButton);
+            this.Controls.Add(this.importCSVButton);
             this.HelpButton = true;
             this.Name = "chiSquared";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -143,14 +160,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button importCSVButton;
+        private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.Label titleText;
+        private System.Windows.Forms.Label yourCSVText;
+        private System.Windows.Forms.Label enterPText;
+        private System.Windows.Forms.TextBox displayCSVText;
+        private System.Windows.Forms.TextBox pvalText;
         private System.Windows.Forms.Button helpButton;
+        private System.Windows.Forms.Button exitButton;
     }
 }
 
