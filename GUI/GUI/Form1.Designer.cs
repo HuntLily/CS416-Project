@@ -42,9 +42,9 @@
             // importCSVButton
             // 
             this.importCSVButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.importCSVButton.Location = new System.Drawing.Point(485, 325);
+            this.importCSVButton.Location = new System.Drawing.Point(459, 153);
             this.importCSVButton.Name = "importCSVButton";
-            this.importCSVButton.Size = new System.Drawing.Size(138, 33);
+            this.importCSVButton.Size = new System.Drawing.Size(131, 22);
             this.importCSVButton.TabIndex = 0;
             this.importCSVButton.Text = "Import CSV File";
             this.importCSVButton.UseVisualStyleBackColor = true;
@@ -52,7 +52,7 @@
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(485, 385);
+            this.calculateButton.Location = new System.Drawing.Point(459, 385);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(138, 33);
             this.calculateButton.TabIndex = 1;
@@ -115,9 +115,9 @@
             // 
             this.helpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.helpButton.Font = new System.Drawing.Font("Garamond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpButton.Location = new System.Drawing.Point(615, 23);
+            this.helpButton.Location = new System.Drawing.Point(614, 23);
             this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(57, 23);
+            this.helpButton.Size = new System.Drawing.Size(58, 25);
             this.helpButton.TabIndex = 7;
             this.helpButton.Text = "Help";
             this.helpButton.UseVisualStyleBackColor = true;
