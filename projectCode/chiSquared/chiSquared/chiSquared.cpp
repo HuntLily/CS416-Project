@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <math.h>
+#include <vector>
+#include <map>
+using namespace std;
 
 
 class ChiSquared
@@ -12,15 +15,19 @@ public:
 	{
 		int nrow; //number of rows
 		int ncol; //number of columns
-		std::unordered_map<string, vector<string>> cat_cols; //categorical cols
-		std::isunordered<string, vector<float>> num_cols; //numerical cols
+		map<string, vector<string>> cat_cols; //categorical cols
+		map<string, vector<float>> num_cols; //numerical cols
+	
 
 	};
 
 };
+
 int main()
 {
     std::cout << "Hello World!\n";
+	
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
