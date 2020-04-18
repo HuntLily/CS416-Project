@@ -4,31 +4,40 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
 
 class ChiSquared
 {
 public:
+	float pval = .05;
 	struct Dataset
 	{
 		int nrow; //number of rows
 		int ncol; //number of columns
-		map<string, vector<string>> cat_cols; //categorical cols
-		map<string, vector<float>> num_cols; //numerical cols
-	
-
+		unordered_map<string, vector<string>> cat_cols; //categorical cols
+		unordered_map<string, vector<float>> num_cols; //numerical cols
 	};
-
+	struct Correlation
+	{
+		string col_1_name;
+		string col_2_name;
+		float coeff;
+	};
+	
+	
+	
 };
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	cout << "hello";
 	
-	
+	return 0;
+
 }
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
