@@ -5,13 +5,18 @@
 #include <math.h>
 #include <vector>
 #include <unordered_map>
+#include <fstream>
+#include <sstream>
+#include <string>
+
+
 using namespace std;
 
 
 class ChiSquared
 {
 public:
-	float pval = .05;
+	double pval = .05;
 	struct Dataset
 	{
 		int nrow; //number of rows
@@ -30,13 +35,13 @@ public:
 	
 };
 
+
+
 int main()
 {
-	cout << "hello";
 	
-	return 0;
-
 }
+	
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

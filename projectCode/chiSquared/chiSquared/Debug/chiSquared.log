@@ -1,3 +1,2 @@
 ﻿  chiSquared.cpp
-C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(14,18): warning C4305: 'initializing': truncation from 'double' to 'float'
   chiSquared.vcxproj -> C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe
