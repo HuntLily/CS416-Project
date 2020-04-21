@@ -8,7 +8,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-
+#include <utility>
+#include <stdexcept>
 
 using namespace std;
 
@@ -34,12 +35,63 @@ public:
 	
 	
 };
+std::vector<std::pair<std::string, std::vector<int>>> readCSV(std::string filename)
+{
+	std::vector<std::pair<std::string, std::vector<int>>> result;
+	//create an input filestream
+	std::ifstream myFile(filename);
+
+	//make sure the file is open
+	if (!myFile.is_open()) throw std::runtime_error("Could not open file");
+
+	//helper values
+	std::string line, colname;
+	int val;
+	//read column names
+	if (myFile.good())
+	{
+		std::getline(myFile, line);
+
+		std::stringstream ss(line);
+		//extract each column name
+		while (std::getline(ss, colname, ','))
+		{
+			//add column name and int vector pairs to result
+			result.push_back({ colname, std::vector<int>{}});
+		}
+	}
+	//read data line by line
+	while (std::getline(myFile, line))
+	{
+		std::stringstream ss(line);
+		//keep track of the column
+		int colIndex = 0;
+		while (ss >> val)
+		{
+			result.at(colIndex).second.push_back(val);
+			if (ss.peek() == ',') ss.ignore();
+			colIndex++;
+		}
+	}
+
+
+	myFile.close();
+	return result;
+
+}
 
 
 
 int main()
 {
+	std::vector<std::pair<std::string, std::vector<int>>> ex = readCSV("example.csv");
 	
+	std::vector<int>::size_type sz = ex.size();
+	for (int i = 0; i < ex.size(); i++)
+	{
+		cout << ex[i].first << ", " << ex.at(i).second[i] << endl;
+		
+	}
 }
 	
 
