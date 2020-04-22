@@ -1,3 +1,3 @@
 ﻿  chiSquared.cpp
-C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(90,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(95,8): warning C4101: 'val': unreferenced local variable
   chiSquared.vcxproj -> C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe

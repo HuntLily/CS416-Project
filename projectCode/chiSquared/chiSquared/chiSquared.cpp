@@ -13,11 +13,6 @@
 
 using namespace std;
 
-
-class ChiSquared
-{
-public:
-	double pval = .05;
 	struct Dataset
 	{
 		int nrow; //number of rows
@@ -25,6 +20,7 @@ public:
 		unordered_map<string, vector<string>> cat_cols; //categorical cols
 		unordered_map<string, vector<float>> num_cols; //numerical cols
 	};
+
 	struct Correlation
 	{
 		string col_1_name;
@@ -34,7 +30,7 @@ public:
 	
 	
 	
-};
+
 std::vector<std::pair<std::string, std::vector<int>>> readCSV(std::string filename)
 {
 	std::vector<std::pair<std::string, std::vector<int>>> result;
@@ -84,14 +80,54 @@ std::vector<std::pair<std::string, std::vector<int>>> readCSV(std::string filena
 
 int main()
 {
-	std::vector<std::pair<std::string, std::vector<int>>> ex = readCSV("example.csv");
+	double pval = .05;
+	//std::vector<std::pair<std::string, std::vector<int>>> ex = readCSV("example.csv");
 	
-	std::vector<int>::size_type sz = ex.size();
-	for (int i = 0; i < ex.size(); i++)
+	//std::vector<int>::size_type sz = ex.size();
+	//for (int i = 0; i < ex.size(); i++)
+	//{
+	//	cout << ex[i].first << ", " << ex.at(i).second[i] << endl;
+	//	
+	//}
+	struct Dataset input;
+	std::ifstream myFile("example.csv");
+	std::string line, colName;
+	float val;
+	
+	if (myFile.good())
 	{
-		cout << ex[i].first << ", " << ex.at(i).second[i] << endl;
-		
+		std::getline(myFile, line);
+
+		std::stringstream ss(line);
+
+		while (std::getline(ss, colName, ','))
+		{
+			input.num_cols[colName];
+		}
 	}
+	unordered_map<string, vector<float>>::iterator p;
+	for (p = input.num_cols.begin(); p != input.num_cols.end(); p++)
+	{
+		cout << p->first << endl;
+	}
+	/*while (std::getline(myFile, line))
+	{
+		std::stringstream ss(line);
+		int colIndx = 0;
+
+
+		while (ss >> val)
+		{
+			input.num_cols.at(colName).push_back(val);
+		}
+
+		if (ss.peek() == ',') ss.ignore();
+
+		colIndx++;
+	}*/
+	myFile.close();
+
+	return 0;
 }
 	
 
@@ -106,3 +142,11 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
+/*
+references used for data input
+https://www.geeksforgeeks.org/unordered_map-in-cpp-stl/
+http://www.cplusplus.com/reference/vector/vector/at/
+https://www.gormanalysis.com/blog/reading-and-writing-csv-files-with-cpp/
+
+*/
