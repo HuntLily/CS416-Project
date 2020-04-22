@@ -1,3 +1,15 @@
-height, weight,dog ,cat
-55,222,8,8
-0,554,7,7
+height, weight,pet,marit,,,,
+55,222,cat,never,,A1,cat,dog
+0,554,dog,married,,a1tot,1,1
+59,389,cat,divorced,,count1,2,
+42,120,cat,widowed,,,,
+86,212,cat,divorced,,,,
+89,235,dog,married,,,,
+23,260,dog,widowed,,,,
+,,,,,,,
+,cat,dog,total,,,,
+never,1,,1,,,,
+divorced,,,1,,,,
+married,,,,,,,
+widowed,,,1,,,,
+total,5,3,7,,,,

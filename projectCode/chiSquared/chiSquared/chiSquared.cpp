@@ -76,6 +76,18 @@ std::vector<std::pair<std::string, std::vector<int>>> readCSV(std::string filena
 
 }
 
+/*
+How to do a Chi-Square Test
+Step 1: Find the Expected Values
+	- Get the total for each column and row being tested
+	- Find (Row total * Column total)/total of all rows and columns combined
+Step 2: Use formula to get Chi Square values
+	- (Observed - Expected)^2 / Expected
+Step 3: add all Chi Square values together.
+Step 4: find Degrees of Freedom = (# of rows - 1) * (# of columns -1)
+Step 5: use library given these 2 values to find p value
+*/
+
 
 
 int main()
