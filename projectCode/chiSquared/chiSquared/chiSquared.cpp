@@ -46,15 +46,15 @@ Step 5: use library given these 2 values to find p value
 */
 
 	// Sean's dumbass method of building the ChiSquare
-	void BuildChiSquare(string c1[], string c2[], int c1Number, int c2Number, string **csv)
+	double getChiVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
 	{
 		// variables
 		string a1[50];
 		int count1 = 0;
-		string a1Tot[50];
+		int a1Tot[50];
 		string a2[50];
 		int count2 = 0;
-		string a2Tot[50];
+		int a2Tot[50];
 
 		//go through each row in column 1 to populate the a1 variables
 		for (int i = 0; i < sizeof(c1); i++)
@@ -63,7 +63,7 @@ Step 5: use library given these 2 values to find p value
 			{
 				// if the object in c1, row i == the variable in spot j of a1, increment the total for a1Tot[j]
 				if (c1[i].compare(a1[j]) == 0)
-					a1Tot[j]+=1;
+					a1Tot[j]++;
 
 				// if the object in c1, row i != any of the variables in a1, add it to the list and update
 				else if (c1[i].compare(a1[j]) != 0 && j == count1)
@@ -82,7 +82,7 @@ Step 5: use library given these 2 values to find p value
 			{
 				// if the object in c1, row i == the variable in spot j of a1, increment the total for a1Tot[j]
 				if (c2[i].compare(a2[j]) == 0)
-					a2Tot[j] += 1;
+					a2Tot[j] ++;
 
 				// if the object in c1, row i != any of the variables in a1, add it to the list and update
 				else if (c2[i].compare(a2[j]) != 0 && j == count2)
@@ -94,8 +94,8 @@ Step 5: use library given these 2 values to find p value
 			}
 		}
 
-		// initialize the 2d array for the chi square
-		string chiA[sizeof(a1)][sizeof(a2)];
+		// initialize the 2d array for the chi square. a1 are the columns, a2 are the rows
+		double chiA[sizeof(a2)][sizeof(a1)];
 
 		// fill in chiA with the observed pairs
 		for (int i = 0; i < sizeof(c1); i++)
@@ -116,7 +116,32 @@ Step 5: use library given these 2 values to find p value
 			}
 		}
 
-		// 
+		// Go through each cell. Find it's expected value, and then use that to set the cell = its chi value
+		double total = 0; 
+		for (int i = 0; i < sizeof(a1Tot); i++)
+		{
+			// in case this method of sizeof gives an error: https://www.geeksforgeeks.org/how-to-find-size-of-array-in-cc-without-using-sizeof-operator/
+			total += a1Tot[i];
+		}
+
+		// variable to return the chi value
+		double chiVal = 0;
+		for (int i = 0; i < count2; i++)
+		{
+			for (int j = 0; j < count1; j++)
+			{
+				// find the expected value
+				int expected = expected = (a1Tot[j] * a2Tot[i]) / total;
+
+				// set the chi square table to the chi value using observed and expected
+				chiA[i][j] = ((chiA[i][j] - expected) * (chiA[i][j] - expected)) / expected;
+
+				chiVal += chiA[i][j];
+			}
+		}
+
+		// return the total chiVal
+		return chiVal;
 	}
 
 
