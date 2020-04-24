@@ -33,6 +33,8 @@ using namespace std;
 
 /*
 How to do a Chi-Square Test
+Step -1: put the CSV file in a format we can use easily
+Step 0: Take two columns and construct the chi square w/ observed values [done]
 Step 1: Find the Expected Values
 	- Get the total for each column and row being tested
 	- Find (Row total * Column total)/total of all rows and columns combined
@@ -43,6 +45,79 @@ Step 4: find Degrees of Freedom = (# of rows - 1) * (# of columns -1)
 Step 5: use library given these 2 values to find p value
 */
 
+	// Sean's dumbass method of building the ChiSquare
+	void BuildChiSquare(string c1[], string c2[], int c1Number, int c2Number, string **csv)
+	{
+		// variables
+		string a1[50];
+		int count1 = 0;
+		string a1Tot[50];
+		string a2[50];
+		int count2 = 0;
+		string a2Tot[50];
+
+		//go through each row in column 1 to populate the a1 variables
+		for (int i = 0; i < sizeof(c1); i++)
+		{
+			for (int j = 0; j <= count1; j++)
+			{
+				// if the object in c1, row i == the variable in spot j of a1, increment the total for a1Tot[j]
+				if (c1[i].compare(a1[j]) == 0)
+					a1Tot[j]+=1;
+
+				// if the object in c1, row i != any of the variables in a1, add it to the list and update
+				else if (c1[i].compare(a1[j]) != 0 && j == count1)
+				{
+					a1[count1] = c1[i];
+					a1Tot[count1] = 1;
+					count1++;
+				}
+			}
+		}
+
+		// go through each row in column 2 to populate the a2 variables
+		for (int i = 0; i < sizeof(c2); i++)
+		{
+			for (int j = 0; j <= count2; j++)
+			{
+				// if the object in c1, row i == the variable in spot j of a1, increment the total for a1Tot[j]
+				if (c2[i].compare(a2[j]) == 0)
+					a2Tot[j] += 1;
+
+				// if the object in c1, row i != any of the variables in a1, add it to the list and update
+				else if (c2[i].compare(a2[j]) != 0 && j == count2)
+				{
+					a2[count2] = c1[i];
+					a2Tot[count2] = 1;
+					count2++;
+				}
+			}
+		}
+
+		// initialize the 2d array for the chi square
+		string chiA[sizeof(a1)][sizeof(a2)];
+
+		// fill in chiA with the observed pairs
+		for (int i = 0; i < sizeof(c1); i++)
+		{
+			for (int j = 0; j < count1; j++)
+			{
+				// check a1 to see if any entries match csv[i][column #1]
+				if (csv[i][c1Number].compare(a1[j]) == 0)
+				{
+					// once you find a match, search through a2 for a match to csv[i][column #2]
+					for (int k = 0; k < count2; k++)
+					{
+						// once a match is found, increment row k, column j of chiA by 1
+						if (csv[i][c2Number].compare(a2[k]) == 0)
+							chiA[k][j] += 1;
+					}
+				}
+			}
+		}
+
+		// 
+	}
 
 
 int main()
