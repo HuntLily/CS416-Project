@@ -32,20 +32,18 @@ using namespace std;
 	
 
 /*
-How to do a Chi-Square Test
-Step -1: put the CSV file in a format we can use easily
-Step 0: Take two columns and construct the chi square w/ observed values [done]
-Step 1: Find the Expected Values
-	- Get the total for each column and row being tested
-	- Find (Row total * Column total)/total of all rows and columns combined
-Step 2: Use formula to get Chi Square values
-	- (Observed - Expected)^2 / Expected
-Step 3: add all Chi Square values together.
-Step 4: find Degrees of Freedom = (# of rows - 1) * (# of columns -1)
-Step 5: use library given these 2 values to find p value
+Steps still necessary for the program
+1. Convert the CSV file data to a 2D array
+2. loop through all combinations of columns
+	1. find the Degrees of Freedom
+	2. Call getChiVal
+3. Call the library function for chi val
+4. store the p-values
+5. display/return the p-values above the threshold. 
+6. parallelize, -O3 gcc, maybe SIMD instructions
 */
 
-	// Sean's dumbass method of building the ChiSquare
+	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns
 	double getChiVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
 	{
 		// variables
