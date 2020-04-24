@@ -33,6 +33,10 @@ using namespace std;
 
 std::vector<std::pair<std::string, std::vector<int>>> readCSV(std::string filename)
 {
+	// implementing my thingie -Sean
+
+	
+
 	std::vector<std::pair<std::string, std::vector<int>>> result;
 	//create an input filestream
 	std::ifstream myFile(filename);
