@@ -18,7 +18,7 @@ using namespace std;
 		int nrow = 0; //number of rows
 		int ncol = 0; //number of columns
 		unordered_map<string, vector<string>> cat_cols; //categorical cols
-		unordered_map<string, vector<float>> num_cols; //numerical cols
+		
 	};
 
 	struct Correlation
@@ -116,14 +116,14 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				input.num_cols[colName];
+				input.cat_cols[colName];
 				input.ncol += 1;
 			}
 			input.nrow += 1;
 		}
 	}
 	
-	/*while (std::getline(myFile, line))
+	while (std::getline(myFile, line))
 	{
 		std::stringstream ss(line);
 		int colIndx = 0;
@@ -131,21 +131,23 @@ int main()
 
 		while (ss >> val)
 		{
-			input.num_cols[colName].data = val;
+			input.cat_cols[colName].at(colIndx).push_back(val);
 			
 		}
 
 		if (ss.peek() == ',') ss.ignore();
 
 		colIndx++;
-	}*/
-	
-	
-	unordered_map<string, vector<float>>::iterator p;
-	for (p = input.num_cols.begin(); p != input.num_cols.end(); p++)
-	{
-			cout << p->first << input.ncol << " " << input.nrow << endl;
 	}
+	
+	
+	unordered_map<string, vector<string>>::iterator p;
+	for (p = input.cat_cols.begin(); p != input.cat_cols.end(); p++)
+	{
+		cout << p->first << endl;
+	}
+	
+	
 	
 	myFile.close();
 
