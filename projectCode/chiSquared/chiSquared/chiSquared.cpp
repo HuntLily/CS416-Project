@@ -37,10 +37,11 @@ Steps still necessary for the program
 2. loop through all combinations of columns
 	1. find the Degrees of Freedom
 	2. Call getChiVal
-3. Call the library function for chi val
-4. store the p-values
-5. display/return the p-values above the threshold. 
-6. parallelize, -O3 gcc, maybe SIMD instructions
+	3. Call the library function for chi val
+3. store the p-values
+4. display/return the p-values above the threshold. 
+5. parallelize, -O3 gcc, maybe SIMD instructions
+6. find and display our run time
 */
 
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns
