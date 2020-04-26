@@ -10,6 +10,7 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
+#include <random>
 
 using namespace std;
 
@@ -139,6 +140,11 @@ Steps still necessary for the program
 			}
 		}
 
+		// get Degrees of Freedom
+		int dof = (count1 - 1) * (count2 - 1);
+		double pVal;
+		std::chi_squared_distribution<double> distribution(double);
+		
 		// return the total chiVal
 		return chiVal;
 	}
@@ -218,5 +224,5 @@ references used for data input
 https://www.geeksforgeeks.org/unordered_map-in-cpp-stl/
 http://www.cplusplus.com/reference/vector/vector/at/
 https://www.gormanalysis.com/blog/reading-and-writing-csv-files-with-cpp/
-
+http://www.cplusplus.com/reference/random/chi_squared_distribution/
 */
