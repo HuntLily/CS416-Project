@@ -152,6 +152,15 @@ Steps still necessary for the program
 
 int main()
 {
+	/*
+	the main() function should:
+	1. find the number of columns and rows
+	2. make every column of data into a unordere_map (either cat or num)
+		2.1 the keys for the columns are strings, name of column, must be unique
+		2.2 the values are either a string or floating point vector (column data)
+	3. call another function that finds the p-value when passed the dataset & threshold
+	*/
+
 	double pval = .05;
 	struct Dataset input;
 	std::ifstream myFile("example.csv");
