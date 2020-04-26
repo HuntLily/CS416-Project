@@ -45,7 +45,7 @@ Steps still necessary for the program
 6. find and display our run time
 */
 
-	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns
+	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
 	double getChiVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
 	{
 		// variables
@@ -125,7 +125,7 @@ Steps still necessary for the program
 		}
 
 		// variable to return the chi value
-		double chiVal = 0;
+		double chiCrit = 0;
 		for (int i = 0; i < count2; i++)
 		{
 			for (int j = 0; j < count1; j++)
@@ -136,17 +136,24 @@ Steps still necessary for the program
 				// set the chi square table to the chi value using observed and expected
 				chiA[i][j] = ((chiA[i][j] - expected) * (chiA[i][j] - expected)) / expected;
 
-				chiVal += chiA[i][j];
+				chiCrit += chiA[i][j];
 			}
 		}
 
 		// get Degrees of Freedom
 		int dof = (count1 - 1) * (count2 - 1);
+		
+		// find the p-value given chiCrit and DoF
 		double pVal;
-		std::chi_squared_distribution<double> distribution(double);
+
+		double k = ((double)dof) * .5;
+		double x = chiCrit * .5;
+		if (dof == 2)
+			return exp(-1.0 * x);
+		pVal = igf(k, x);
 		
 		// return the total chiVal
-		return chiVal;
+		return chiCrit;
 	}
 
 
