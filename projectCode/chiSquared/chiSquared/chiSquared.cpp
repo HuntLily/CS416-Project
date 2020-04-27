@@ -184,12 +184,13 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				input.cat_cols[colName];
 				input.ncol += 1;
 			}
 			input.nrow += 1;
 		}
 	}
+	
+
 	
 	while (std::getline(myFile, line))
 	{
@@ -199,7 +200,7 @@ int main()
 
 		while (ss >> val)
 		{
-			input.cat_cols[colName].at(colIndx).push_back(val);
+			input.cat_cols[colName].
 			
 		}
 
