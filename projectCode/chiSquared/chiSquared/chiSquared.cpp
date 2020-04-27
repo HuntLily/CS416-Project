@@ -181,9 +181,8 @@ int main()
 		}
 
 		// clear the cursor
-		myFile.clear();
-		
-		
+		ss.clear();
+		ss.seekg(0, std::ios::beg);
 
 		// make the array of unordered maps = the number of columns
 		//std::unordered_map<string, vector<string>> dataSet(ncol);
@@ -196,10 +195,8 @@ int main()
 			dataSet[counter][colName];
 		}
 
-		// clear the cursor
-		myFile.clear();
 
-
+		// checking for good input by listing it in console.
 		unordered_map<string, vector<string>>::iterator p;
 		for (int i = 0; i < ncol; i++)
 		{
@@ -209,6 +206,30 @@ int main()
 				
 			}
 		}
+
+		counter = 0;
+		while (std::getline(myFile, line))
+		{
+			while (std::getline(ss, colName, ','))
+			{
+				dataSet[counter].emplace(colName, std::vector<string>());
+			}
+		}
+
+		// checking for good input by listing it in console.
+		for (int i = 0; i < ncol; i++)
+		{
+			for (p = dataSet[i].begin(); p != dataSet[i].end(); p++)
+			{
+				for (int j = 0; j < 1; j++)
+				{
+					cout << p->second[j] << endl;
+				}
+			}
+		}
+	}
+
+
 
 		/*
 		while (std::getline(myFile, line))
@@ -253,7 +274,6 @@ int main()
 			cout << s << endl;
 		}*/
 	
-	}
 	
 	
 	
