@@ -149,6 +149,9 @@
   <ItemGroup>
     <ClCompile Include="chiSquared.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\ChisquarePValueFinder\ChisquarePValueFinder\include\ChisquarePValueFinder.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
