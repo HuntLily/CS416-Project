@@ -10,11 +10,8 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
-<<<<<<< HEAD
-//#include "C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\ChisquarePValueFinder.h"
-=======
 #include "ChisquarePValueFinder.h"
->>>>>>> 08679c6fc807de6c4eeaf173c86f1964db3e4de7
+
 
 using namespace std;
 
@@ -185,7 +182,7 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				input.cat_cols.insert({ colName, std::vector<string>{input.nrow} });
+				input.cat_cols.insert({ colName, std::vector<string>{(unsigned int)input.nrow} });
 
 				input.ncol += 1;
 			}
