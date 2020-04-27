@@ -10,10 +10,13 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
+#include <typeinfo>
 #include "ChisquarePValueFinder.h"
+#include <chrono>
 
 
 using namespace std;
+using namespace std::chrono;
 
 	struct Dataset
 	{
@@ -220,6 +223,7 @@ int main()
 			cout << p->first << ": ";
 			for (int i = 0; i < dataSet.at(p->first).size(); i++)
 			{
+				
 				 cout << p->second[i] << " ";
 			}
 			cout << endl;
@@ -228,6 +232,14 @@ int main()
 
 	// for each "tupple" in the unordered_map, find every combination and call getPVal with the two of them
 
+	//find if an item is an categorical or numerical value
+	
+	//time our method 
+	//auto start = high_resolution_clock::now();
+	//auto stop = high_resolution_clock::now();
+	//auto duration = duration_cast<microseconds>(stop - start);
+	//cout << "Time taken by the function: " << duration.count() << " microseconds" << endl;
+	
 
 	myFile.close();
 
