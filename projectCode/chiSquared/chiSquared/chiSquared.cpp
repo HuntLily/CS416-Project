@@ -19,8 +19,8 @@ using namespace std;
 	{
 		int nrow = 0; //number of rows
 		int ncol = 0; //number of columns
-		unordered_map<string, vector<string>> col1; // column 1
-		unordered_map<string, vector<string>> col2; // column 2
+		unordered_map<string, vector<string>> catCol; // categorical columns
+		unordered_map<string, vector<float>> numCol; // numerical columns
 	};
 
 	struct Correlation
@@ -47,7 +47,7 @@ Steps still necessary for the program
 */
 
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
-	double getPVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
+	/*double getPVal(vector<string> c1, vector<string> c2, int c1Number, int c2Number, string **csv)
 	{
 		// variables
 		string a1[50];
@@ -148,7 +148,7 @@ Steps still necessary for the program
 		double pVal = chisqr(dof, chiCrit);
 
 		return pVal;
-	}
+	}*/
 
 
 int main()
@@ -226,6 +226,7 @@ int main()
 		}
 	}
 
+	// for each "tupple" in the unordered_map, find every combination and call getPVal with the two of them
 
 
 	myFile.close();
