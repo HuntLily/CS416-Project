@@ -187,14 +187,15 @@ int main()
 
 		// make the array of unordered maps = the number of columns
 		//std::unordered_map<string, vector<string>> dataSet(ncol);
-		unordered_map<string, vector<string>>* dataSet = new unordered_map<string, vector<string>>[ncol];
+		unordered_map<string, vector<string>> dataSet;
 
 		// go through and set the key string for each map in the array
-		int counter = 0;
 		while (std::getline(ss, colName, ','))
 		{
-			dataSet[counter][colName];
+			dataSet[colName];
 		}
+
+		// get the number of rows. Temporary.
 		while (std::getline(myFile, line))
 		{
 			nrow += 1;
@@ -204,28 +205,23 @@ int main()
 
 		// checking for good input by listing it in console.
 		unordered_map<string, vector<string>>::iterator p;
-		for (int i = 0; i < ncol; i++)
+		for (p = dataSet.begin(); p != dataSet.end(); p++)
 		{
-			for (p = dataSet[i].begin(); p != dataSet[i].end(); p++)
-			{
-				cout << p->first << endl;
-				
-			}
+			cout << p->first << endl;
 		}
 
-		counter = 0;
 		while (std::getline(myFile, line))
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				dataSet[counter].emplace(colName, std::vector<string>{(unsigned int)nrow});
+				dataSet.emplace(colName, std::vector<string>{(unsigned int)nrow});
 			}
 		}
 
 		// checking for good input by listing it in console.
 		for (int i = 0; i < ncol; i++)
 		{
-			for (p = dataSet[i].begin(); p != dataSet[i].end(); p++)
+			for (p = dataSet.begin(); p != dataSet.end(); p++)
 			{
 				for (int j = 0; j < 1; j++)
 				{
