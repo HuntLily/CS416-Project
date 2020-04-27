@@ -166,9 +166,9 @@ int main()
 	double pval = .05;
 	//struct Dataset input;
 	int ncol = 0;
-	int nrow = 0;
+	int nrow = 1;
 	std::ifstream myFile("example.csv");
-	std::string line, colName;
+	std::string line, dataEntry;
 	string val;
 	
 	if (myFile.good())
@@ -176,23 +176,9 @@ int main()
 		std::getline(myFile, line);
 
 		std::stringstream ss(line);
-		while (std::getline(ss, colName, ','))
+		while (std::getline(ss, dataEntry, ','))
 		{
 			ncol += 1;
-		}
-
-		// clear the cursor
-		ss.clear();
-		ss.seekg(0, std::ios::beg);
-
-		// make the array of unordered maps = the number of columns
-		//std::unordered_map<string, vector<string>> dataSet(ncol);
-		unordered_map<string, vector<string>> dataSet;
-
-		// go through and set the key string for each map in the array
-		while (std::getline(ss, colName, ','))
-		{
-			dataSet[colName];
 		}
 
 		// get the number of rows. Temporary.
@@ -200,7 +186,24 @@ int main()
 		{
 			nrow += 1;
 		}
-		
+
+		// clear the cursor
+		ss.clear();
+		ss.seekg(0, std::ios::beg);
+		myFile.clear();
+		myFile.seekg(0, std::ios::beg);
+
+		// make the array of unordered maps = the number of columns
+		//std::unordered_map<string, vector<string>> dataSet(ncol);
+		unordered_map<string, vector<string>> dataSet;
+		vector<string> colName;
+
+		// go through and set the key string for each map in the array
+		while (std::getline(ss, dataEntry, ','))
+		{
+			dataSet[dataEntry];
+			colName.push_back(dataEntry);
+		}
 
 
 		// checking for good input by listing it in console.
@@ -210,24 +213,27 @@ int main()
 			cout << p->first << endl;
 		}
 
+		int counter = 0;
 		while (std::getline(myFile, line))
 		{
-			while (std::getline(ss, colName, ','))
+			while (std::getline(ss, dataEntry, ','))
 			{
-				dataSet.emplace(colName, std::vector<string>{(unsigned int)nrow});
+				dataSet.at(colName[counter]).push_back(dataEntry);
+				counter++;
 			}
+			// finished a line, reset counter
+			counter = 0;
 		}
 
 		// checking for good input by listing it in console.
-		for (int i = 0; i < ncol; i++)
+		for (p = dataSet.begin(); p != dataSet.end(); p ++)
 		{
-			for (p = dataSet.begin(); p != dataSet.end(); p++)
+			cout << p->first << ": ";
+			for (int i = 0; i < dataSet.at(p->first).size(); i++)
 			{
-				for (int j = 0; j < 1; j++)
-				{
-					cout << p->second.at(j) << endl;
-				}
+				 cout << p->second[i] << " ";
 			}
+			cout << endl;
 		}
 	}
 
