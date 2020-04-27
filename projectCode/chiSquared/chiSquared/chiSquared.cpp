@@ -150,7 +150,7 @@ Steps still necessary for the program
 		double x = chiCrit * .5;
 		if (dof == 2)
 			return exp(-1.0 * x);
-		pVal = igf(k, x);
+		//pVal = igf(k, x);
 		
 		// return the total chiVal
 		return chiCrit;
@@ -172,7 +172,7 @@ int main()
 	struct Dataset input;
 	std::ifstream myFile("example.csv");
 	std::string line, colName;
-	float val;
+	string val;
 	
 	if (myFile.good())
 	{
@@ -184,8 +184,10 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
+				input.cat_cols.insert({ colName, std::vector<string>{7} });
 				input.ncol += 1;
 			}
+			
 			input.nrow += 1;
 		}
 	}
@@ -200,8 +202,7 @@ int main()
 
 		while (ss >> val)
 		{
-			input.cat_cols[colName].
-			
+			input.cat_cols[colName];
 		}
 
 		if (ss.peek() == ',') ss.ignore();
@@ -211,9 +212,15 @@ int main()
 	
 	
 	unordered_map<string, vector<string>>::iterator p;
+
 	for (p = input.cat_cols.begin(); p != input.cat_cols.end(); p++)
 	{
 		cout << p->first << endl;
+		for (string s : p->second)
+		{
+			cout << s << endl;
+		}
+	
 	}
 	
 	
