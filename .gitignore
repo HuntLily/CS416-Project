@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+projectCode/chiSquared/.vs/chiSquared/v16/.suo
+projectCode/chiSquared/.vs/chiSquared/v16/Browse.VC.db
