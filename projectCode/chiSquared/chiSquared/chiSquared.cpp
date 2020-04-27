@@ -19,8 +19,8 @@ using namespace std;
 	{
 		int nrow = 0; //number of rows
 		int ncol = 0; //number of columns
-		unordered_map<string, vector<string>> cat_cols; //categorical cols
-		
+		unordered_map<string, vector<string>> col1; // column 1
+		unordered_map<string, vector<string>> col2; // column 2
 	};
 
 	struct Correlation
@@ -47,7 +47,7 @@ Steps still necessary for the program
 */
 
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
-	double getPVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
+	/*double getPVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
 	{
 		// variables
 		string a1[50];
@@ -148,7 +148,7 @@ Steps still necessary for the program
 		double pVal = chisqr(dof, chiCrit);
 
 		return pVal;
-	}
+	}*/
 
 
 int main()
@@ -164,7 +164,8 @@ int main()
 	*/
 
 	double pval = .05;
-	struct Dataset input;
+	//struct Dataset input;
+	int ncol = 0;
 	std::ifstream myFile("example.csv");
 	std::string line, colName;
 	string val;
@@ -174,11 +175,42 @@ int main()
 		std::getline(myFile, line);
 
 		std::stringstream ss(line);
-		while (std::getline(myFile, line))
+		while (std::getline(ss, colName, ','))
 		{
-			input.nrow += 1;
+			ncol += 1;
 		}
 
+		// clear the cursor
+		myFile.clear();
+		
+		
+
+		// make the array of unordered maps = the number of columns
+		//std::unordered_map<string, vector<string>> dataSet(ncol);
+		unordered_map<string, vector<string>>* dataSet = new unordered_map<string, vector<string>>[ncol];
+
+		// go through and set the key string for each map in the array
+		int counter = 0;
+		while (std::getline(ss, colName, ','))
+		{
+			dataSet[counter][colName];
+		}
+
+		// clear the cursor
+		myFile.clear();
+
+
+		unordered_map<string, vector<string>>::iterator p;
+		for (int i = 0; i < ncol; i++)
+		{
+			for (p = dataSet[i].begin(); p != dataSet[i].end(); p++)
+			{
+				cout << p->first << endl;
+				
+			}
+		}
+
+		/*
 		while (std::getline(myFile, line))
 		{
 			while (std::getline(ss, colName, ','))
@@ -219,7 +251,7 @@ int main()
 		for (string s : p->second)
 		{
 			cout << s << endl;
-		}
+		}*/
 	
 	}
 	
