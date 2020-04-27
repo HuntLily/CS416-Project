@@ -47,7 +47,7 @@ Steps still necessary for the program
 */
 
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
-	/*double getPVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
+	double getPVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
 	{
 		// variables
 		string a1[50];
@@ -148,7 +148,7 @@ Steps still necessary for the program
 		double pVal = chisqr(dof, chiCrit);
 
 		return pVal;
-	}*/
+	}
 
 
 int main()
@@ -164,9 +164,8 @@ int main()
 	*/
 
 	double pval = .05;
-	//struct Dataset input;
 	int ncol = 0;
-	int nrow = 1;
+	int nrow = 0;
 	std::ifstream myFile("example.csv");
 	std::string line, dataEntry;
 	string val;
@@ -181,12 +180,6 @@ int main()
 			ncol += 1;
 		}
 
-		// get the number of rows. Temporary.
-		while (std::getline(myFile, line))
-		{
-			nrow += 1;
-		}
-
 		// clear the cursor
 		ss.clear();
 		ss.seekg(0, std::ios::beg);
@@ -194,7 +187,6 @@ int main()
 		myFile.seekg(0, std::ios::beg);
 
 		// make the array of unordered maps = the number of columns
-		//std::unordered_map<string, vector<string>> dataSet(ncol);
 		unordered_map<string, vector<string>> dataSet;
 		vector<string> colName;
 
@@ -205,17 +197,11 @@ int main()
 			colName.push_back(dataEntry);
 		}
 
-
-		// checking for good input by listing it in console.
-		unordered_map<string, vector<string>>::iterator p;
-		for (p = dataSet.begin(); p != dataSet.end(); p++)
-		{
-			cout << p->first << endl;
-		}
-
 		int counter = 0;
 		while (std::getline(myFile, line))
 		{
+			ss.clear();
+			ss << line;
 			while (std::getline(ss, dataEntry, ','))
 			{
 				dataSet.at(colName[counter]).push_back(dataEntry);
@@ -223,8 +209,11 @@ int main()
 			}
 			// finished a line, reset counter
 			counter = 0;
+			nrow += 1;
 		}
 
+		// checking for good input by listing it in console.
+		unordered_map<string, vector<string>>::iterator p;
 		// checking for good input by listing it in console.
 		for (p = dataSet.begin(); p != dataSet.end(); p ++)
 		{
@@ -239,52 +228,6 @@ int main()
 
 
 
-		/*
-		while (std::getline(myFile, line))
-		{
-			while (std::getline(ss, colName, ','))
-			{
-				input.cat_cols.insert({ colName, std::vector<string>{(unsigned int) input.nrow} });
-
-				input.ncol += 1;
-			}
-			
-			
-		}
-	}
-	
-
-	
-	while (std::getline(myFile, line))
-	{
-		std::stringstream ss(line);
-		int colIndx = 0;
-
-
-		while (ss >> val)
-		{
-			input.cat_cols[colName];
-		}
-
-		if (ss.peek() == ',') ss.ignore();
-
-		colIndx++;
-	}
-	
-	
-	unordered_map<string, vector<string>>::iterator p;
-
-	for (p = input.cat_cols.begin(); p != input.cat_cols.end(); p++)
-	{
-		cout << p->first << endl;
-		for (string s : p->second)
-		{
-			cout << s << endl;
-		}*/
-	
-	
-	
-	
 	myFile.close();
 
 	return 0;
