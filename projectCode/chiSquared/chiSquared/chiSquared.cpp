@@ -10,7 +10,8 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
-//#include "C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\ChisquarePValueFinder.h"
+#include "ChisquarePValueFinder.h"
+
 
 using namespace std;
 
@@ -144,16 +145,9 @@ Steps still necessary for the program
 		int dof = (count1 - 1) * (count2 - 1);
 		
 		// find the p-value given chiCrit and DoF
-		double pVal;
+		double pVal = chisqr(dof, chiCrit);
 
-		double k = ((double)dof) * .5;
-		double x = chiCrit * .5;
-		if (dof == 2)
-			return exp(-1.0 * x);
-		//pVal = igf(k, x);
-		
-		// return the total chiVal
-		return chiCrit;
+		return pVal;
 	}
 
 
@@ -188,7 +182,7 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				input.cat_cols.insert({ colName, std::vector<string>{input.nrow} });
+				input.cat_cols.insert({ colName, std::vector<string>{(unsigned int)input.nrow} });
 
 				input.ncol += 1;
 			}

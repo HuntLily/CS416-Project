@@ -1,4 +1,5 @@
 ﻿  chiSquared.cpp
-C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(134,53): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(147,10): warning C4101: 'pVal': unreferenced local variable
-C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(191,63): error C2398: Element '1': conversion from 'int' to 'const unsigned int' requires a narrowing conversion
+C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(135,53): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(148,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+chiSquared.obj : error LNK2019: unresolved external symbol "double __cdecl chisqr(int,float)" (?chisqr@@YANHM@Z) referenced in function "double __cdecl getChiVal(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > * const,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > * const,int,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > * *)" (?getChiVal@@YANQAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0HHPAPAV12@@Z)
+C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe : fatal error LNK1120: 1 unresolved externals
