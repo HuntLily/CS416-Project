@@ -35,11 +35,11 @@ using namespace std;
 
 /*
 Steps still necessary for the program
-1. Convert the CSV file data to a 2D array
+1. Convert the CSV file data to a dataSet w/ Unmapped things
 2. loop through all combinations of columns
-	1. find the Degrees of Freedom
-	2. Call getChiVal
-	3. Call the library function for chi val
+	1. find the Degrees of Freedom [done]
+	2. Call getChiVal [done]
+	3. Call the library function for chi val [done]
 3. store the p-values
 4. display/return the p-values above the threshold. 
 5. parallelize, -O3 gcc, maybe SIMD instructions
@@ -47,7 +47,7 @@ Steps still necessary for the program
 */
 
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
-	double getChiVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
+	double getPVal(string c1[], string c2[], int c1Number, int c2Number, string **csv)
 	{
 		// variables
 		string a1[50];
@@ -156,10 +156,11 @@ int main()
 	/*
 	the main() function should:
 	1. find the number of columns and rows
-	2. make every column of data into a unordere_map (either cat or num)
+	2. make every column of data into a unordered_map (either cat or num)
 		2.1 the keys for the columns are strings, name of column, must be unique
 		2.2 the values are either a string or floating point vector (column data)
 	3. call another function that finds the p-value when passed the dataset & threshold
+	4. main then displays/whatever the p-values as output
 	*/
 
 	double pval = .05;
