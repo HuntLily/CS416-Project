@@ -10,7 +10,7 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
-#include "C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\ChisquarePValueFinder.h"
+#include "ChisquarePValueFinder.h"
 
 using namespace std;
 
