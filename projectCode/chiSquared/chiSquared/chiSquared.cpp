@@ -166,6 +166,7 @@ int main()
 	double pval = .05;
 	//struct Dataset input;
 	int ncol = 0;
+	int nrow = 0;
 	std::ifstream myFile("example.csv");
 	std::string line, colName;
 	string val;
@@ -194,6 +195,11 @@ int main()
 		{
 			dataSet[counter][colName];
 		}
+		while (std::getline(myFile, line))
+		{
+			nrow += 1;
+		}
+		
 
 
 		// checking for good input by listing it in console.
@@ -212,7 +218,7 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				dataSet[counter].emplace(colName, std::vector<string>());
+				dataSet[counter].emplace(colName, std::vector<string>{(unsigned int)nrow});
 			}
 		}
 
@@ -223,7 +229,7 @@ int main()
 			{
 				for (int j = 0; j < 1; j++)
 				{
-					cout << p->second[j] << endl;
+					cout << p->second.at(j) << endl;
 				}
 			}
 		}
