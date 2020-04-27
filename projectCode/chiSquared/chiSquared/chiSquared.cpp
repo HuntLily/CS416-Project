@@ -10,7 +10,7 @@
 #include <string>
 #include <utility>
 #include <stdexcept>
-#include "C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\ChisquarePValueFinder.h"
+//#include "C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\ChisquarePValueFinder.h"
 
 using namespace std;
 
@@ -179,16 +179,21 @@ int main()
 		std::getline(myFile, line);
 
 		std::stringstream ss(line);
-		
+		while (std::getline(myFile, line))
+		{
+			input.nrow += 1;
+		}
+
 		while (std::getline(myFile, line))
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				input.cat_cols.insert({ colName, std::vector<string>{7} });
+				input.cat_cols.insert({ colName, std::vector<string>{input.nrow} });
+
 				input.ncol += 1;
 			}
 			
-			input.nrow += 1;
+			
 		}
 	}
 	

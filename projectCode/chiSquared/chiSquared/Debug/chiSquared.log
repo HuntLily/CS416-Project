@@ -1,4 +1,4 @@
 ﻿  chiSquared.cpp
 C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(134,53): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(147,10): warning C4101: 'pVal': unreferenced local variable
-  chiSquared.vcxproj -> C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe
+C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(191,63): error C2398: Element '1': conversion from 'int' to 'const unsigned int' requires a narrowing conversion
