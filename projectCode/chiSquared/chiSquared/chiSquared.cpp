@@ -183,7 +183,7 @@ int main()
 		{
 			while (std::getline(ss, colName, ','))
 			{
-				input.cat_cols.insert({ colName, std::vector<string>{(unsigned int)input.nrow} });
+				input.cat_cols.insert({ colName, std::vector<string>{(unsigned int) input.nrow} });
 
 				input.ncol += 1;
 			}
