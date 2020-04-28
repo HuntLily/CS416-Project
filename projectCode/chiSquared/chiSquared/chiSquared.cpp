@@ -59,7 +59,7 @@ Steps still necessary for the program
 		3. create the Correlation struct w/ results
 		4. return Correlation
 		*/
-
+		
 		// create the variables needed for the function
 		vector<Correlation> results;
 		string c1Name;
