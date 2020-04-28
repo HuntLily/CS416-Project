@@ -197,13 +197,6 @@ Steps still necessary for the program
 					}
 				}
 
-				//int* chiSquare = new int[chiRows.size()][chiCols.size()];
-
-				/*int** chiSquare;
-				chiSquare = new int* [chiRows.size()];
-				for(int i = 0; i < chiRows.size(); i++)
-					chiSquare[i] = new int[chiCols.size()];*/
-
 				// create a 2D vector to hold all of the observed values for each pair in the 2 columns
 				vector<vector<int>> chiSquare(chiRows.size());
 				for (int i = 0; i < chiRows.size(); i++)
