@@ -23,7 +23,6 @@ using namespace std::chrono;
 		int nrow = 0; //number of rows
 		int ncol = 0; //number of columns
 		unordered_map<string, vector<string>> catCol; // categorical columns
-		unordered_map<string, vector<float>> numCol; // numerical columns
 	};
 
 	struct Correlation
@@ -41,10 +40,10 @@ Steps still necessary for the program
 1. Convert the CSV file data to a dataSet w/ Unmapped things [done]
 2. loop through all combinations of columns [done]
 	1. find the Degrees of Freedom [done]
-	2. Call getPValues() 
+	2. Call getPValues() [done]
 	3. Call the library function for chi val [done]
-3. store the p-values 
-4. display/return the p-values above the threshold. 
+3. store the p-values [done]
+4. display/return the p-values above the threshold. [done]
 5. parallelize, -O3 gcc, maybe SIMD instructions
 6. find and display our run time [done]
 */
@@ -196,6 +195,7 @@ int main()
 	int ncol = 0;
 	int nrow = 0;
 	struct Dataset data;
+	vector<Correlation> results;
 	std::ifstream myFile("example.csv");
 	std::string line, dataEntry;
 	string val;
@@ -243,8 +243,7 @@ int main()
 		}
 
 		// checking for good input by listing it in console.
-		unordered_map<string, vector<string>>::iterator p;
-		// checking for good input by listing it in console.
+		/*unordered_map<string, vector<string>>::iterator p;
 		for (p = dataSet.begin(); p != dataSet.end(); p ++)
 		{
 			cout << p->first << ": ";
@@ -254,7 +253,19 @@ int main()
 				 cout << p->second[i] << " ";
 			}
 			cout << endl;
-		}
+		}*/
+
+		// fill in the Datasctructure with the values we've found so far
+		data.ncol = ncol;
+		data.nrow = nrow;
+		data.catCol = dataSet;
+
+		// get the results of the chi-square test by calling the getPValues method and storing the results in results
+		results = getPValues(data, pval);
+
+		// display all results in console (for now)
+		for (int i = 0; i < results.size(); i++)
+			cout << "Column 1: " << results[i].col_1_name << "\nColumn 2: " << results[i].col_2_name << "\nCoefficient: " << results[i].coeff << endl;
 	}
 	
 	//time our method 
