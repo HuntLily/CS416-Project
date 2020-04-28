@@ -38,15 +38,15 @@ using namespace std::chrono;
 
 /*
 Steps still necessary for the program
-1. Convert the CSV file data to a dataSet w/ Unmapped things
-2. loop through all combinations of columns
+1. Convert the CSV file data to a dataSet w/ Unmapped things [done]
+2. loop through all combinations of columns [done]
 	1. find the Degrees of Freedom [done]
-	2. Call getChiVal [done]
+	2. Call getPValues() 
 	3. Call the library function for chi val [done]
-3. store the p-values
+3. store the p-values 
 4. display/return the p-values above the threshold. 
 5. parallelize, -O3 gcc, maybe SIMD instructions
-6. find and display our run time
+6. find and display our run time [done]
 */
 
 	// Sean's slightly better second attempt at the PValue bogus
@@ -256,8 +256,6 @@ int main()
 			cout << endl;
 		}
 	}
-
-	//find if an item is an categorical or numerical value
 	
 	//time our method 
 	//auto start = high_resolution_clock::now();
