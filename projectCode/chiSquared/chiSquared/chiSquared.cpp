@@ -197,13 +197,17 @@ Steps still necessary for the program
 					}
 				}
 
-				// create a 2D array to hold all of the observed values for each pair in the 2 columns
 				//int* chiSquare = new int[chiRows.size()][chiCols.size()];
 
-				int** chiSquare;
+				/*int** chiSquare;
 				chiSquare = new int* [chiRows.size()];
 				for(int i = 0; i < chiRows.size(); i++)
-					chiSquare[i] = new int[chiCols.size()];
+					chiSquare[i] = new int[chiCols.size()];*/
+
+				// create a 2D vector to hold all of the observed values for each pair in the 2 columns
+				vector<vector<int>> chiSquare(chiRows.size());
+				for (int i = 0; i < chiRows.size(); i++)
+					chiSquare[i] = vector<int>(chiCols.size());
 
 				// go through and fill in the observed values. 
 				for (int i = 0; i < column2.size(); i++)
@@ -219,6 +223,7 @@ Steps still necessary for the program
 								if (column1[i] == chiCols[k])
 								{
 									// when you find a match for column1, increment the 2d array according to which variables it matches
+									//chiSquare[j][k]++;
 									chiSquare[j][k]++;
 								}
 							}
@@ -259,8 +264,8 @@ Steps still necessary for the program
 					results.push_back(result);
 				}
 
-				// clear the 2D array's memory
-				delete(chiSquare);
+				// clear the 2D vector's memory
+				chiSquare.clear();
 			}
 		}
 
