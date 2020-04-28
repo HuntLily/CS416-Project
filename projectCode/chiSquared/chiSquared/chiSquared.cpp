@@ -258,6 +258,9 @@ Steps still necessary for the program
 					result.col_2_name = cName2;
 					results.push_back(result);
 				}
+
+				// clear the 2D array's memory
+				delete(chiSquare);
 			}
 		}
 
@@ -282,7 +285,7 @@ int main()
 	int nrow = 0;
 	struct Dataset data;
 	vector<Correlation> results;
-	std::ifstream myFile("pets.csv");
+	std::ifstream myFile("example.csv");
 	std::string line, dataEntry;
 	string val;
 	
@@ -327,19 +330,6 @@ int main()
 			counter = 0;
 			nrow += 1;
 		}
-
-		// checking for good input by listing it in console.
-		/*unordered_map<string, vector<string>>::iterator p;
-		for (p = dataSet.begin(); p != dataSet.end(); p ++)
-		{
-			cout << p->first << ": ";
-			for (int i = 0; i < dataSet.at(p->first).size(); i++)
-			{
-				
-				 cout << p->second[i] << " ";
-			}
-			cout << endl;
-		}*/
 
 		// fill in the Datasctructure with the values we've found so far
 		data.ncol = ncol;
