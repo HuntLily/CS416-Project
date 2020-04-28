@@ -179,18 +179,6 @@ Steps still necessary for the program
 		return results;
 	}
 
-	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
-	/*double getPVal(vector<string> c1, vector<string> c2, int c1Number, int c2Number, string **csv)
-	{
-		// get Degrees of Freedom
-		int dof = (count1 - 1) * (count2 - 1);
-		
-		// find the p-value given chiCrit and DoF
-		double pVal = chisqr(dof, chiCrit);
-
-		return pVal;
-	}*/
-
 
 int main()
 {
@@ -268,8 +256,6 @@ int main()
 			cout << endl;
 		}
 	}
-
-	// for each "tupple" in the unordered_map, find every combination and call getPVal with the two of them
 
 	//find if an item is an categorical or numerical value
 	
