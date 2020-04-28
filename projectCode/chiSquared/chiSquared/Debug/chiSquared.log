@@ -1,3 +1,18 @@
 ﻿  chiSquared.cpp
-C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(224,22): warning C4018: '<': signed/unsigned mismatch
-  chiSquared.vcxproj -> C:\Users\lcpxc\Desktop\SoftwareEng\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\tgmath.h(27): warning UCRT4000: The Universal CRT implementation of tgmath.h does not conform to the C99 standard. Functionality equivalent to the type-generic functions provided by tgmath.h is available in <ctgmath> when compiling as C++. If compiling in C++17 mode or higher (/std:c++17), this header will automatically include <ctgmath> instead. You can define _CRT_SILENCE_NONCONFORMING_TGMATH_H to acknowledge that you have received this warning.
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(90,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(92,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(107,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(109,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(129,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(132,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(137,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(152,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(154,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(157,22): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(168,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(68,9): warning C4101: 'critVal': unreferenced local variable
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(269,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(272,21): warning C4018: '<': signed/unsigned mismatch
+chiSquared.obj : error LNK2019: unresolved external symbol "double __cdecl chisqr(int,float)" (?chisqr@@YANHM@Z) referenced in function "class std::vector<struct Correlation,class std::allocator<struct Correlation> > __cdecl getPValues(struct Dataset,float)" (?getPValues@@YA?AV?$vector@UCorrelation@@V?$allocator@UCorrelation@@@std@@@std@@UDataset@@M@Z)
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe : fatal error LNK1120: 1 unresolved externals

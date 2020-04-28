@@ -2,6 +2,7 @@
 // 
 
 #include <iostream>
+#include <tgmath.h>
 #include <math.h>
 #include <vector>
 #include <unordered_map>
@@ -63,7 +64,7 @@ Steps still necessary for the program
 		vector<Correlation> results;
 		string c1Name;
 		string c2Name;
-		float pValue;
+		float pValue = pval;
 		float critVal;
 
 		// first things first, loop through every combination of two columns
@@ -75,9 +76,9 @@ Steps still necessary for the program
 			l++;
 			for (l; l != data.catCol.end(); l++)
 			{
-				vector<string> column1 = p->second;
+				vector<string> &column1 = p->second;
 				string cName1 = p->first;
-				vector<string> column2 = l -> second;
+				vector<string> &column2 = l -> second;
 				string cName2 = l -> first;
 
 				// inside the for loop, do the fun times chi-square stuff
@@ -86,11 +87,11 @@ Steps still necessary for the program
 				vector<int> chiColTot;
 
 				// Get the number of unique variables in column 1, and how often they occur
-				for (int i = 0; i < column1.size; i++)
+				for (int i = 0; i < p->second.size(); i++)
 				{
-					for (int j = 0; j < chiCols.size+1; j++)
+					for (int j = 0; j < chiCols.size()+1; j++)
 					{
-						if (column1[i] != chiCols[j] && j == chiCols.size)
+						if (column1[i] != chiCols[j] && j == chiCols.size())
 						{
 							chiCols.push_back(column1[i]);
 							chiColTot.push_back(1);
@@ -103,11 +104,11 @@ Steps still necessary for the program
 				// same thing for the rows
 				vector<string> chiRows;
 				vector<int> chiRowTot;
-				for (int i = 0; i < column2.size; i++)
+				for (int i = 0; i < column2.size(); i++)
 				{
-					for (int j = 0; j < chiRows.size + 1; j++)
+					for (int j = 0; j < chiRows.size() + 1; j++)
 					{
-						if (column2[i] != chiRows[j] && j == chiRows.size)
+						if (column2[i] != chiRows[j] && j == chiRows.size())
 						{
 							chiRows.push_back(column2[i]);
 							chiRowTot.push_back(1);
@@ -118,18 +119,22 @@ Steps still necessary for the program
 				}
 
 				// create a 2D array to hold all of the observed values for each pair in the 2 columns
-				int chiSquare[chiRows.size][chiCols.size];
+				//int* chiSquare = new int[chiRows.size()][chiCols.size()];
+
+				int** chiSquare;
+				chiSquare = new int* [chiRows.size()];
+				chiSquare[chiRows.size()] = new int[chiCols.size()];
 
 				// go through and fill in the observed values. 
-				for (int i = 0; i < column2.size; i++)
+				for (int i = 0; i < column2.size(); i++)
 				{
 					// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
-					for (int j = 0; j < chiRows.size; j++)
+					for (int j = 0; j < chiRows.size(); j++)
 					{
 						if (column2[i] == chiRows[j])
 						{
 							// once you've found a match, find column1[i]'s match in chiCols
-							for (int k = 0; k < chiCols.size; k++)
+							for (int k = 0; k < chiCols.size(); k++)
 							{
 								if (column1[i] == chiCols[k])
 								{
@@ -144,20 +149,20 @@ Steps still necessary for the program
 				// find the expected value and chi value for each cell; add them to get the chi Crit value
 				float chiCrit = 0;
 
-				for (int i = 0; i < chiRows.size; i++)
+				for (int i = 0; i < chiRows.size(); i++)
 				{
-					for (int j = 0; j < chiCols.size; j++)
+					for (int j = 0; j < chiCols.size(); j++)
 					{
 						// expected value = (row total * col total) / overall total
 						float expected = (chiRowTot[i] * chiColTot[j]) / data.nrow;
 
 						//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
-						chiCrit = ((chiSquare[i][j] - expected) ^ 2) / expected;
+						chiCrit = pow((chiSquare[i][j] - expected),2) / expected;
 					}
 				}
 
 				// get the Degrees of Freedom = (# of rows - 1) * (# of columns -1)
-				int dof = (chiRows.size - 1) * (chiCols.size - 1);
+				int dof = (chiRows.size() - 1) * (chiCols.size() - 1);
 
 				// find the p-value given chiCrit and dof
 				pval = chisqr(dof, chiCrit);
