@@ -46,77 +46,109 @@ Steps still necessary for the program
 6. find and display our run time
 */
 
+	// Sean's slightly better second attempt at the PValue bogus
+	Correlation getPValues(Dataset data, float pval)
+	{
+		/* 
+		Things this method should do
+		1. Go through each pair of tupples in the unordered_map
+		2. find their P-value w/ the math below
+		3. create the Correlation struct w/ results
+		4. return Correlation
+		*/
+
+		// create the variables needed for the function
+		vector<Correlation> results;
+		string c1Name;
+		string c2Name;
+		float pValue;
+		float critVal;
+
+		// first things first, loop through every combination of two columns
+		unordered_map<string, vector<string>>::iterator p;
+		unordered_map<string, vector<string>>::iterator l;
+		for (p = data.catCol.begin(); p != data.catCol.end(); p++)
+		{
+			l = p;
+			l++;
+			for (l; l != data.catCol.end(); l++)
+			{
+				vector<string> column1 = p->second;
+				string cName1 = p->first;
+				vector<string> column2 = l -> second;
+				string cName2 = l -> first;
+
+				// inside the for loop, do the fun times chi-square stuff
+				// first, get the number of variables in col1 and col2
+				vector<string> chiCols;
+				vector<int> chiColTot;
+
+				// Get the number of unique variables in column 1, and how often they occur
+				for (int i = 0; i < column1.size; i++)
+				{
+					for (int j = 0; j < chiCols.size+1; j++)
+					{
+						if (column1[i] != chiCols[j] && j == chiCols.size)
+						{
+							chiCols.push_back(column1[i]);
+							chiColTot.push_back(1);
+						}
+						else if (column1[i] == chiCols[j])
+							chiColTot[j]++;
+					}
+				}
+
+				// same thing for the rows
+				vector<string> chiRows;
+				vector<int> chiRowTot;
+				for (int i = 0; i < column2.size; i++)
+				{
+					for (int j = 0; j < chiRows.size + 1; j++)
+					{
+						if (column2[i] != chiRows[j] && j == chiRows.size)
+						{
+							chiRows.push_back(column2[i]);
+							chiRowTot.push_back(1);
+						}
+						else if (column2[i] == chiRows[j])
+							chiRowTot[j]++;
+					}
+				}
+
+				// create a 2D array to hold all of the observed values for each pair in the 2 columns
+				int chiSquare[chiRows.size][chiCols.size];
+
+				// go through and fill in the observed values. 
+				for (int i = 0; i < column2.size; i++)
+				{
+					// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
+					for (int j = 0; j < chiRows.size; j++)
+					{
+						if (column2[i] == chiRows[j])
+						{
+							// once you've found a match, find column1[i]'s match in chiCols
+							for (int k = 0; k < chiCols.size; k++)
+							{
+								if (column1[i] == chiCols[k])
+								{
+									// when you find a match for column1, increment the 2d array according to which variables it matches
+									chiSquare[j][k]++;
+								}
+							}
+						}
+					}
+
+
+				}
+			}
+		}
+
+		
+	}
+
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
 	/*double getPVal(vector<string> c1, vector<string> c2, int c1Number, int c2Number, string **csv)
 	{
-		// variables
-		string a1[50];
-		int count1 = 0;
-		int a1Tot[50];
-		string a2[50];
-		int count2 = 0;
-		int a2Tot[50];
-
-		//go through each row in column 1 to populate the a1 variables
-		for (int i = 0; i < sizeof(c1); i++)
-		{
-			for (int j = 0; j <= count1; j++)
-			{
-				// if the object in c1, row i == the variable in spot j of a1, increment the total for a1Tot[j]
-				if (c1[i].compare(a1[j]) == 0)
-					a1Tot[j]++;
-
-				// if the object in c1, row i != any of the variables in a1, add it to the list and update
-				else if (c1[i].compare(a1[j]) != 0 && j == count1)
-				{
-					a1[count1] = c1[i];
-					a1Tot[count1] = 1;
-					count1++;
-				}
-			}
-		}
-
-		// go through each row in column 2 to populate the a2 variables
-		for (int i = 0; i < sizeof(c2); i++)
-		{
-			for (int j = 0; j <= count2; j++)
-			{
-				// if the object in c1, row i == the variable in spot j of a1, increment the total for a1Tot[j]
-				if (c2[i].compare(a2[j]) == 0)
-					a2Tot[j] ++;
-
-				// if the object in c1, row i != any of the variables in a1, add it to the list and update
-				else if (c2[i].compare(a2[j]) != 0 && j == count2)
-				{
-					a2[count2] = c1[i];
-					a2Tot[count2] = 1;
-					count2++;
-				}
-			}
-		}
-
-		// initialize the 2d array for the chi square. a1 are the columns, a2 are the rows
-		double chiA[sizeof(a2)][sizeof(a1)];
-
-		// fill in chiA with the observed pairs
-		for (int i = 0; i < sizeof(c1); i++)
-		{
-			for (int j = 0; j < count1; j++)
-			{
-				// check a1 to see if any entries match csv[i][column #1]
-				if (csv[i][c1Number].compare(a1[j]) == 0)
-				{
-					// once you find a match, search through a2 for a match to csv[i][column #2]
-					for (int k = 0; k < count2; k++)
-					{
-						// once a match is found, increment row k, column j of chiA by 1
-						if (csv[i][c2Number].compare(a2[k]) == 0)
-							chiA[k][j] += 1;
-					}
-				}
-			}
-		}
-
 		// Go through each cell. Find it's expected value, and then use that to set the cell = its chi value
 		double total = 0; 
 		for (int i = 0; i < sizeof(a1Tot); i++)
@@ -166,6 +198,7 @@ int main()
 	double pval = .05;
 	int ncol = 0;
 	int nrow = 0;
+	struct Dataset data;
 	std::ifstream myFile("example.csv");
 	std::string line, dataEntry;
 	string val;
