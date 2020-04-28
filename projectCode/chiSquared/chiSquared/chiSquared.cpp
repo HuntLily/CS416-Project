@@ -12,7 +12,6 @@
 #include <utility>
 #include <stdexcept>
 #include <typeinfo>
-#include "ChisquarePValueFinder.h"
 #include <chrono>
 
 
@@ -48,6 +47,57 @@ Steps still necessary for the program
 5. parallelize, -O3 gcc, maybe SIMD instructions
 6. find and display our run time [done]
 */
+
+	// the chi-square library because it wouldn't work and there was nothing else in the readme indicating what to do and I am tired
+	static double igf(double S, double Z)
+	{
+		if (Z < 0.0)
+		{
+			return 0.0;
+		}
+		double Sc = (1.0 / S);
+		Sc *= pow(Z, S);
+		Sc *= exp(-Z);
+
+		double Sum = 1.0;
+		double Nom = 1.0;
+		double Denom = 1.0;
+
+		for (int r = 0; r < 200; r++)
+		{
+			Nom *= Z;
+			S++;
+			Denom *= S;
+			Sum += (Nom / Denom);
+		}
+
+		return Sum * Sc;
+	}
+
+	///finding p value functions
+	double chisqr(int Dof, float Cv)
+	{
+		if (Cv < 0 || Dof < 1)
+		{
+			return 0.0;
+		}
+		double K = ((double)Dof) * 0.5;
+		double X = ((double)Cv) * 0.5;
+		if (Dof == 2)
+		{
+			return exp(-1.0 * X);
+		}
+
+		double PValue = igf(K, X);
+		if (isnan(PValue) || isinf(PValue) || PValue <= 1e-8)
+		{
+			return 1e-14;
+		}
+
+		PValue /= tgamma(K);
+
+		return (1.0 - PValue);
+	}
 
 	// Sean's slightly better second attempt at the PValue bogus
 	std:: vector<Correlation> getPValues(Dataset data, float pval)
@@ -165,7 +215,8 @@ Steps still necessary for the program
 				int dof = (chiRows.size() - 1) * (chiCols.size() - 1);
 
 				// find the p-value given chiCrit and dof
-				pval = chisqr(dof, chiCrit);
+				pValue = chisqr(dof, chiCrit);
+
 
 				// check if pval is above the required amount
 				if (pValue >= pval)
