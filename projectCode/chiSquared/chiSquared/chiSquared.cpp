@@ -202,7 +202,8 @@ Steps still necessary for the program
 
 				int** chiSquare;
 				chiSquare = new int* [chiRows.size()];
-				chiSquare[chiRows.size()] = new int[chiCols.size()];
+				for(int i = 0; i < chiRows.size(); i++)
+					chiSquare[i] = new int[chiCols.size()];
 
 				// go through and fill in the observed values. 
 				for (int i = 0; i < column2.size(); i++)
@@ -281,7 +282,7 @@ int main()
 	int nrow = 0;
 	struct Dataset data;
 	vector<Correlation> results;
-	std::ifstream myFile("example.csv");
+	std::ifstream myFile("pets.csv");
 	std::string line, dataEntry;
 	string val;
 	
