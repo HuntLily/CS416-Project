@@ -139,15 +139,30 @@ Steps still necessary for the program
 				// Get the number of unique variables in column 1, and how often they occur
 				for (int i = 0; i < p->second.size(); i++)
 				{
-					for (int j = 0; j < chiCols.size()+1; j++)
+					for (int j = 0; j <= chiCols.size(); j++)
 					{
-						if (column1[i] != chiCols[j] && j == chiCols.size())
+						// on the first item, always push onto the vector
+						if (chiCols.size() == 0)
 						{
 							chiCols.push_back(column1[i]);
 							chiColTot.push_back(1);
+							break;
 						}
+
+						// if the item is unique and you have finished comparing to all current variables, push onto the vector
+						else if (column1[i] != chiCols[j] && j == chiCols.size()-1)
+						{
+							chiCols.push_back(column1[i]);
+							chiColTot.push_back(1);
+							break;
+						}
+
+						// if you find a match, increase the count of that match
 						else if (column1[i] == chiCols[j])
+						{
 							chiColTot[j]++;
+							break;
+						}
 					}
 				}
 
@@ -156,15 +171,29 @@ Steps still necessary for the program
 				vector<int> chiRowTot;
 				for (int i = 0; i < column2.size(); i++)
 				{
-					for (int j = 0; j < chiRows.size() + 1; j++)
+					for (int j = 0; j <= chiRows.size(); j++)
 					{
-						if (column2[i] != chiRows[j] && j == chiRows.size())
+						// on the first item, always push onto the vector
+						if (chiRows.size() == 0)
 						{
 							chiRows.push_back(column2[i]);
 							chiRowTot.push_back(1);
+							break;
 						}
+
+						// if the item is unique and you have finished comparing to all current variables, push onto the vector
+						else if (column2[i] != chiRows[j] && j == chiRows.size()-1)
+						{
+							chiRows.push_back(column2[i]);
+							chiRowTot.push_back(1);
+							break;
+						}
+
 						else if (column2[i] == chiRows[j])
+						{
 							chiRowTot[j]++;
+							break;
+						}
 					}
 				}
 
