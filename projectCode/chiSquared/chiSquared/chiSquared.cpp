@@ -50,7 +50,7 @@ Steps still necessary for the program
 */
 
 	// Sean's slightly better second attempt at the PValue bogus
-	Correlation getPValues(Dataset data, float pval)
+	std:: vector<Correlation> getPValues(Dataset data, float pval)
 	{
 		/* 
 		Things this method should do
@@ -140,42 +140,48 @@ Steps still necessary for the program
 							}
 						}
 					}
+				}
 
+				// find the expected value and chi value for each cell; add them to get the chi Crit value
+				float chiCrit = 0;
 
+				for (int i = 0; i < chiRows.size; i++)
+				{
+					for (int j = 0; j < chiCols.size; j++)
+					{
+						// expected value = (row total * col total) / overall total
+						float expected = (chiRowTot[i] * chiColTot[j]) / data.nrow;
+
+						//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
+						chiCrit = ((chiSquare[i][j] - expected) ^ 2) / expected;
+					}
+				}
+
+				// get the Degrees of Freedom = (# of rows - 1) * (# of columns -1)
+				int dof = (chiRows.size - 1) * (chiCols.size - 1);
+
+				// find the p-value given chiCrit and dof
+				pval = chisqr(dof, chiCrit);
+
+				// check if pval is above the required amount
+				if (pValue >= pval)
+				{
+					// create a Correlations struct based on the results of this test and add it to the vector of Correlations 'results'
+					Correlation result;
+					result.coeff = pValue;
+					result.col_1_name = cName1;
+					result.col_2_name = cName2;
+					results.push_back(result);
 				}
 			}
 		}
 
-		
+		return results;
 	}
 
 	// Sean's dumbass method of building the ChiSquare, and getting the chi value for the 2 columns, getting their dof, and returning the p-value
 	/*double getPVal(vector<string> c1, vector<string> c2, int c1Number, int c2Number, string **csv)
 	{
-		// Go through each cell. Find it's expected value, and then use that to set the cell = its chi value
-		double total = 0; 
-		for (int i = 0; i < sizeof(a1Tot); i++)
-		{
-			// in case this method of sizeof gives an error: https://www.geeksforgeeks.org/how-to-find-size-of-array-in-cc-without-using-sizeof-operator/
-			total += a1Tot[i];
-		}
-
-		// variable to return the chi value
-		double chiCrit = 0;
-		for (int i = 0; i < count2; i++)
-		{
-			for (int j = 0; j < count1; j++)
-			{
-				// find the expected value
-				int expected = expected = (a1Tot[j] * a2Tot[i]) / total;
-
-				// set the chi square table to the chi value using observed and expected
-				chiA[i][j] = ((chiA[i][j] - expected) * (chiA[i][j] - expected)) / expected;
-
-				chiCrit += chiA[i][j];
-			}
-		}
-
 		// get Degrees of Freedom
 		int dof = (count1 - 1) * (count2 - 1);
 		
