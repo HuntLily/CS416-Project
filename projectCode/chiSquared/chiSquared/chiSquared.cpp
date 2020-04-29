@@ -278,15 +278,23 @@ int main()
 	4. main then displays/whatever the p-values as output
 	*/
 
-	double pval = .05;
+	double pval = 0.5;
 	int ncol = 0;
 	int nrow = 0;
 	struct Dataset data;
 	vector<Correlation> results;
-
+	string fileName;
+	
+	//get the file and pvalue from the user
+	cout << "Enter a file name: " << endl;
+	cin >> fileName;
+	fileName = fileName + ".csv";
+	cout << "enter a p-value." << endl;
+	cin >> pval;
+	
 	// get file name and p-value
 
-
+	
 	std::ifstream myFile("example.csv");
 	std::string line, dataEntry;
 	string val;
