@@ -228,14 +228,14 @@ Steps still necessary for the program
 				}
 
 				// find the expected value and chi value for each cell; add them to get the chi Crit value
-				long chiCrit = 0;
+				float chiCrit = 0;
 				// parallelize
 				for (int i = 0; i < chiRows.size(); i++)
 				{
 					for (int j = 0; j < chiCols.size(); j++)
 					{
 						// expected value = (row total * col total) / overall total
-						long expected = (chiRowTot[i] * chiColTot[j]) / data.nrow;
+						float expected = (chiRowTot[i] * chiColTot[j]) / (float)data.nrow;
 
 						//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
 						chiCrit = pow((chiSquare[i][j] - expected),2) / expected;
