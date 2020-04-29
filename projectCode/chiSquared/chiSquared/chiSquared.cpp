@@ -115,7 +115,6 @@ Steps still necessary for the program
 		string c1Name;
 		string c2Name;
 		float pValue = pval;
-		float critVal;
 
 		// first things first, loop through every combination of two columns
 		unordered_map<string, vector<string>>::iterator p;
@@ -229,14 +228,14 @@ Steps still necessary for the program
 				}
 
 				// find the expected value and chi value for each cell; add them to get the chi Crit value
-				float chiCrit = 0;
+				long chiCrit = 0;
 				// parallelize
 				for (int i = 0; i < chiRows.size(); i++)
 				{
 					for (int j = 0; j < chiCols.size(); j++)
 					{
 						// expected value = (row total * col total) / overall total
-						float expected = (chiRowTot[i] * chiColTot[j]) / data.nrow;
+						long expected = (chiRowTot[i] * chiColTot[j]) / data.nrow;
 
 						//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
 						chiCrit = pow((chiSquare[i][j] - expected),2) / expected;
