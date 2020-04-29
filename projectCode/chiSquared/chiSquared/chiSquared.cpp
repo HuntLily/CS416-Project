@@ -137,6 +137,8 @@ Steps still necessary for the program
 				vector<int> chiColTot;
 
 				// Get the number of unique variables in column 1, and how often they occur
+
+				// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
 				for (int i = 0; i < p->second.size(); i++)
 				{
 					for (int j = 0; j <= chiCols.size(); j++)
@@ -198,11 +200,13 @@ Steps still necessary for the program
 				}
 
 				// create a 2D vector to hold all of the observed values for each pair in the 2 columns
+				// parallelize?
 				vector<vector<int>> chiSquare(chiRows.size());
 				for (int i = 0; i < chiRows.size(); i++)
 					chiSquare[i] = vector<int>(chiCols.size());
 
 				// go through and fill in the observed values. 
+				// parallelize
 				for (int i = 0; i < column2.size(); i++)
 				{
 					// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
@@ -226,7 +230,7 @@ Steps still necessary for the program
 
 				// find the expected value and chi value for each cell; add them to get the chi Crit value
 				float chiCrit = 0;
-
+				// parallelize
 				for (int i = 0; i < chiRows.size(); i++)
 				{
 					for (int j = 0; j < chiCols.size(); j++)
@@ -292,6 +296,7 @@ int main()
 	cout << "enter a p-value." << endl;
 	cin >> pval;
 	
+	// paralellize???
 	std::ifstream myFile(fileName);
 	std::string line, dataEntry;
 	string val;
