@@ -292,10 +292,7 @@ int main()
 	cout << "enter a p-value." << endl;
 	cin >> pval;
 	
-	// get file name and p-value
-
-	
-	std::ifstream myFile("example.csv");
+	std::ifstream myFile(fileName);
 	std::string line, dataEntry;
 	string val;
 	
