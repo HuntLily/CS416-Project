@@ -235,10 +235,10 @@ Steps still necessary for the program
 					for (int j = 0; j < chiCols.size(); j++)
 					{
 						// expected value = (row total * col total) / overall total
-						float expected = (chiRowTot[i] * chiColTot[j]) / (float)data.nrow;
+						float expected = ((float)chiRowTot[i] * (float)chiColTot[j]) / ((float)data.nrow-1);
 
 						//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
-						chiCrit = pow((chiSquare[i][j] - expected),2) / expected;
+						chiCrit = pow(((float)chiSquare[i][j] - expected), 2) / expected;
 					}
 				}
 
