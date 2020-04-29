@@ -5,6 +5,7 @@
 #include <tgmath.h>
 #include <math.h>
 #include <vector>
+#include <omp.h>
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
@@ -13,6 +14,7 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <chrono>
+
 
 
 using namespace std;
@@ -138,31 +140,34 @@ Steps still necessary for the program
 				// Get the number of unique variables in column 1, and how often they occur
 
 				// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
+
+				
 				for (int i = 0; i < p->second.size(); i++)
 				{
 					for (int j = 0; j <= chiCols.size(); j++)
 					{
 						// on the first item, always push onto the vector
-						if (chiCols.size() == 0)
+						bool breaker = true;
+						if (chiCols.size() == 0 && breaker)
 						{
 							chiCols.push_back(column1[i]);
 							chiColTot.push_back(1);
-							break;
+							breaker = false;
 						}
 
 						// if the item is unique and you have finished comparing to all current variables, push onto the vector
-						else if (column1[i] != chiCols[j] && j == chiCols.size()-1)
+						else if (column1[i] != chiCols[j] && j == chiCols.size()-1 && breaker)
 						{
 							chiCols.push_back(column1[i]);
 							chiColTot.push_back(1);
-							break;
+							breaker = false;
 						}
 
 						// if you find a match, increase the count of that match
-						else if (column1[i] == chiCols[j])
+						else if (column1[i] == chiCols[j] && breaker)
 						{
 							chiColTot[j]++;
-							break;
+							breaker = false;
 						}
 					}
 				}
