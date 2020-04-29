@@ -121,10 +121,14 @@ Steps still necessary for the program
 		// first things first, loop through every combination of two columns
 		unordered_map<string, vector<string>>::iterator p;
 		unordered_map<string, vector<string>>::iterator l;
+
+#pragma omp parallel
+#pragma omp for collapse(2)
 		for (p = data.catCol.begin(); p != data.catCol.end(); p++)
 		{
 			l = p;
 			l++;
+
 			for (l; l != data.catCol.end(); l++)
 			{
 				vector<string> &column1 = p->second;
@@ -141,14 +145,15 @@ Steps still necessary for the program
 
 				// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
 
-				
+
 				for (int i = 0; i < p->second.size(); i++)
 				{
+					bool breaker = true;
 					for (int j = 0; j <= chiCols.size(); j++)
 					{
 						// on the first item, always push onto the vector
-						bool breaker = true;
-						if (chiCols.size() == 0 && breaker)
+						
+						if (breaker && chiCols.size() == 0)
 						{
 							chiCols.push_back(column1[i]);
 							chiColTot.push_back(1);
@@ -156,7 +161,7 @@ Steps still necessary for the program
 						}
 
 						// if the item is unique and you have finished comparing to all current variables, push onto the vector
-						else if (column1[i] != chiCols[j] && j == chiCols.size()-1 && breaker)
+						else if (breaker && (column1[i] != chiCols[j] && j == chiCols.size()-1))
 						{
 							chiCols.push_back(column1[i]);
 							chiColTot.push_back(1);
@@ -164,7 +169,7 @@ Steps still necessary for the program
 						}
 
 						// if you find a match, increase the count of that match
-						else if (column1[i] == chiCols[j] && breaker)
+						else if ( breaker && (column1[i] == chiCols[j]) )
 						{
 							chiColTot[j]++;
 							breaker = false;
