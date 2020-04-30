@@ -122,159 +122,175 @@ Steps still necessary for the program
 		unordered_map<string, vector<string>>::iterator p;
 		unordered_map<string, vector<string>>::iterator l;
 
-#pragma omp parallel
-#pragma omp for collapse(2)
-		for (p = data.catCol.begin(); p != data.catCol.end(); p++)
-		{
-			l = p;
-			l++;
 
-			for (l; l != data.catCol.end(); l++)
+		
+
+			for (p = data.catCol.begin(); p != data.catCol.end(); p++)
 			{
-				vector<string> &column1 = p->second;
-				string cName1 = p->first;
-				vector<string> &column2 = l -> second;
-				string cName2 = l -> first;
-
-				// inside the for loop, do the fun times chi-square stuff
-				// first, get the number of variables in col1 and col2
-				vector<string> chiCols;
-				vector<int> chiColTot;
-
-				// Get the number of unique variables in column 1, and how often they occur
-
-				// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
-
-
-				for (int i = 0; i < p->second.size(); i++)
+				for ((l = p, l++); l != data.catCol.end(); l++)
 				{
-					bool breaker = true;
-					for (int j = 0; j <= chiCols.size(); j++)
+					vector<string>& column1 = p->second;
+					string cName1 = p->first;
+					vector<string>& column2 = l->second;
+					string cName2 = l->first;
+
+					// inside the for loop, do the fun times chi-square stuff
+					// first, get the number of variables in col1 and col2
+					vector<string> chiCols;
+					vector<int> chiColTot;
+
+					// Get the number of unique variables in column 1, and how often they occur
+
+					// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
+
+#pragma omp parallel for
+					for (int i = 0; i < p->second.size(); i++)
 					{
-						// on the first item, always push onto the vector
-						
-						if (breaker && chiCols.size() == 0)
-						{
-							chiCols.push_back(column1[i]);
-							chiColTot.push_back(1);
-							breaker = false;
-						}
+						std::cout << "test" << omp_get_thread_num;;
 
-						// if the item is unique and you have finished comparing to all current variables, push onto the vector
-						else if (breaker && (column1[i] != chiCols[j] && j == chiCols.size()-1))
-						{
-							chiCols.push_back(column1[i]);
-							chiColTot.push_back(1);
-							breaker = false;
-						}
+						bool breaker = true;
 
-						// if you find a match, increase the count of that match
-						else if ( breaker && (column1[i] == chiCols[j]) )
+						for (int j = 0; j <= chiCols.size(); j++)
 						{
-							chiColTot[j]++;
-							breaker = false;
-						}
-					}
-				}
+#pragma omp critical
 
-				// same thing for the rows
-				vector<string> chiRows;
-				vector<int> chiRowTot;
-				for (int i = 0; i < column2.size(); i++)
-				{
-					for (int j = 0; j <= chiRows.size(); j++)
-					{
-						// on the first item, always push onto the vector
-						if (chiRows.size() == 0)
-						{
-							chiRows.push_back(column2[i]);
-							chiRowTot.push_back(1);
-							break;
-						}
+							// on the first item, always push onto the vector
 
-						// if the item is unique and you have finished comparing to all current variables, push onto the vector
-						else if (column2[i] != chiRows[j] && j == chiRows.size()-1)
-						{
-							chiRows.push_back(column2[i]);
-							chiRowTot.push_back(1);
-							break;
-						}
-
-						else if (column2[i] == chiRows[j])
-						{
-							chiRowTot[j]++;
-							break;
-						}
-					}
-				}
-
-				// create a 2D vector to hold all of the observed values for each pair in the 2 columns
-				// parallelize?
-				vector<vector<int>> chiSquare(chiRows.size());
-				for (int i = 0; i < chiRows.size(); i++)
-					chiSquare[i] = vector<int>(chiCols.size());
-
-				// go through and fill in the observed values. 
-				// parallelize
-				for (int i = 0; i < column2.size(); i++)
-				{
-					// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
-					for (int j = 0; j < chiRows.size(); j++)
-					{
-						if (column2[i] == chiRows[j])
-						{
-							// once you've found a match, find column1[i]'s match in chiCols
-							for (int k = 0; k < chiCols.size(); k++)
+							if (breaker && chiCols.size() == 0)
 							{
-								if (column1[i] == chiCols[k])
+								chiCols.push_back(column1[i]);
+								chiColTot.push_back(1);
+								breaker = false;
+							}
+
+							// if the item is unique and you have finished comparing to all current variables, push onto the vector
+							else if (breaker && (column1[i] != chiCols[j] && j == chiCols.size() - 1))
+							{
+								chiCols.push_back(column1[i]);
+								chiColTot.push_back(1);
+								breaker = false;
+							}
+
+							// if you find a match, increase the count of that match
+							else if (breaker && (column1[i] == chiCols[j]))
+							{
+								chiColTot[j]++;
+								breaker = false;
+							}
+						}
+					}
+
+					// same thing for the rows
+					vector<string> chiRows;
+					vector<int> chiRowTot;
+					
+
+#pragma omp parallel for
+					for (int i = 0; i < column2.size(); i++)
+					{
+						bool breaker = true;
+
+						for (int j = 0; j <= chiRows.size(); j++)
+						{
+#pragma omp critical
+							// on the first item, always push onto the vector
+
+							if (breaker && chiRows.size() == 0)
+							{
+								chiRows.push_back(column2[i]);
+								chiRowTot.push_back(1);
+								breaker = false;
+							}
+
+							// if the item is unique and you have finished comparing to all current variables, push onto the vector
+							else if (breaker && column2[i] != chiRows[j] && j == chiRows.size() - 1)
+							{
+								chiRows.push_back(column2[i]);
+								chiRowTot.push_back(1);
+								breaker = false;
+							}
+
+							else if (breaker && column2[i] == chiRows[j])
+							{
+								chiRowTot[j]++;
+								breaker = false;
+
+							}
+							std::cout << "INNER " << j << " THREAD "<< omp_get_thread_num() <<endl;
+						}
+						std::cout << "OUTER " << i << " " << endl;
+					}
+
+				
+		
+
+					// create a 2D vector to hold all of the observed values for each pair in the 2 columns
+					// parallelize?
+					vector<vector<int>> chiSquare(chiRows.size());
+					for (int i = 0; i < chiRows.size(); i++)
+						chiSquare[i] = vector<int>(chiCols.size());
+
+					// go through and fill in the observed values. 
+					// parallelize
+					for (int i = 0; i < column2.size(); i++)
+					{
+						// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
+						for (int j = 0; j < chiRows.size(); j++)
+						{
+							if (column2[i] == chiRows[j])
+							{
+								// once you've found a match, find column1[i]'s match in chiCols
+								for (int k = 0; k < chiCols.size(); k++)
 								{
-									// when you find a match for column1, increment the 2d array according to which variables it matches
-									//chiSquare[j][k]++;
-									chiSquare[j][k]++;
+									if (column1[i] == chiCols[k])
+									{
+										// when you find a match for column1, increment the 2d array according to which variables it matches
+										//chiSquare[j][k]++;
+										chiSquare[j][k]++;
+									}
 								}
 							}
 						}
 					}
-				}
 
-				// find the expected value and chi value for each cell; add them to get the chi Crit value
-				float chiCrit = 0;
-				// parallelize
-				for (int i = 0; i < chiRows.size(); i++)
-				{
-					for (int j = 0; j < chiCols.size(); j++)
+					// find the expected value and chi value for each cell; add them to get the chi Crit value
+					float chiCrit = 0;
+					// parallelize
+					for (int i = 0; i < chiRows.size(); i++)
 					{
-						// expected value = (row total * col total) / overall total
-						float expected = ((float)chiRowTot[i] * (float)chiColTot[j]) / ((float)data.nrow-1);
+						for (int j = 0; j < chiCols.size(); j++)
+						{
+							// expected value = (row total * col total) / overall total
+							float expected = ((float)chiRowTot[i] * (float)chiColTot[j]) / ((float)data.nrow - 1);
 
-						//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
-						chiCrit = pow(((float)chiSquare[i][j] - expected), 2) / expected;
+							//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
+							chiCrit = pow(((float)chiSquare[i][j] - expected), 2) / expected;
+						}
 					}
+
+					// get the Degrees of Freedom = (# of rows - 1) * (# of columns -1)
+					int dof = (chiRows.size() - 1) * (chiCols.size() - 1);
+
+					// find the p-value given chiCrit and dof
+					pValue = chisqr(dof, chiCrit);
+
+
+					// check if pval is above the required amount
+					if (pValue >= pval)
+					{
+						// create a Correlations struct based on the results of this test and add it to the vector of Correlations 'results'
+						Correlation result;
+						result.coeff = pValue;
+						result.col_1_name = cName1;
+						result.col_2_name = cName2;
+						results.push_back(result);
+					}
+
+					// clear the 2D vector's memory
+					chiSquare.clear();
 				}
-
-				// get the Degrees of Freedom = (# of rows - 1) * (# of columns -1)
-				int dof = (chiRows.size() - 1) * (chiCols.size() - 1);
-
-				// find the p-value given chiCrit and dof
-				pValue = chisqr(dof, chiCrit);
-
-
-				// check if pval is above the required amount
-				if (pValue >= pval)
-				{
-					// create a Correlations struct based on the results of this test and add it to the vector of Correlations 'results'
-					Correlation result;
-					result.coeff = pValue;
-					result.col_1_name = cName1;
-					result.col_2_name = cName2;
-					results.push_back(result);
-				}
-
-				// clear the 2D vector's memory
-				chiSquare.clear();
 			}
-		}
-
+		
 		return results;
 	}
 
@@ -299,10 +315,10 @@ int main()
 	string fileName;
 	
 	//get the file and pvalue from the user
-	cout << "Enter a file name: " << endl;
+	std::cout << "Enter a file name: " << endl;
 	cin >> fileName;
 	fileName = fileName + ".csv";
-	cout << "enter a p-value." << endl;
+	std::cout << "enter a p-value." << endl;
 	cin >> pval;
 	
 	// paralellize???
@@ -358,18 +374,23 @@ int main()
 		data.catCol = dataSet;
 
 		// get the results of the chi-square test by calling the getPValues method and storing the results in results
+		auto start = high_resolution_clock::now();
 		results = getPValues(data, pval);
-
+		auto stop = high_resolution_clock::now();
 		// display all results in console (for now)
 		for (int i = 0; i < results.size(); i++)
-			cout << "Column 1: " << results[i].col_1_name << "\nColumn 2: " << results[i].col_2_name << "\nCoefficient: " << results[i].coeff << endl;
+			std::cout << "Column 1: " << results[i].col_1_name << "\nColumn 2: " << results[i].col_2_name << "\nCoefficient: " << results[i].coeff << endl;
+
+
+
+		auto duration = duration_cast<microseconds>(stop - start);
+		std::cout << "Time taken by the function: " << duration.count() << " microseconds" << endl;
 	}
 	
 	//time our method 
-	//auto start = high_resolution_clock::now();
-	//auto stop = high_resolution_clock::now();
-	//auto duration = duration_cast<microseconds>(stop - start);
-	//cout << "Time taken by the function: " << duration.count() << " microseconds" << endl;
+	//
+	//
+
 	
 
 	myFile.close();
