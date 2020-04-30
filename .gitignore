@@ -342,3 +342,5 @@ ASALocalRun/
 healthchecksdb
 projectCode/chiSquared/.vs/chiSquared/v16/.suo
 projectCode/chiSquared/.vs/chiSquared/v16/Browse.VC.db
+projectCode/chiSquared/.vs/chiSquared/v16/Browse.VC.db
+*.db
