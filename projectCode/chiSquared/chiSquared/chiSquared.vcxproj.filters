@@ -23,5 +23,8 @@
     <ClInclude Include="..\..\..\ChisquarePValueFinder\ChisquarePValueFinder\include\ChisquarePValueFinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="catch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

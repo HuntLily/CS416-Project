@@ -1,6 +1,7 @@
 // chiSquared.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // 
 
+#define CATCH_CONFIG_MAIN
 #include <iostream>
 #include <tgmath.h>
 #include <math.h>
@@ -16,7 +17,6 @@
 #include <chrono>
 #include <thread>
 #include "catch.hpp"
-#define CATCH_CONFIG_MAIN
 
 
 using namespace std;
