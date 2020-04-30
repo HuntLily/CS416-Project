@@ -14,7 +14,8 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <chrono>
-
+#include <thread>
+#include "catch.hpp"
 
 
 using namespace std;
@@ -33,22 +34,6 @@ using namespace std::chrono;
 		string col_2_name;
 		float coeff;
 	};
-	
-	
-	
-
-/*
-Steps still necessary for the program
-1. Convert the CSV file data to a dataSet w/ Unmapped things [done]
-2. loop through all combinations of columns [done]
-	1. find the Degrees of Freedom [done]
-	2. Call getPValues() [done]
-	3. Call the library function for chi val [done]
-3. store the p-values [done]
-4. display/return the p-values above the threshold. [done]
-5. parallelize, -O3 gcc, maybe SIMD instructions
-6. find and display our run time [done]
-*/
 
 	// the chi-square library because it wouldn't work and there was nothing else in the readme indicating what to do and I am tired
 	static double igf(double S, double Z)
@@ -103,15 +88,7 @@ Steps still necessary for the program
 
 	// Sean's slightly better second attempt at the PValue bogus
 	std:: vector<Correlation> getPValues(Dataset data, float pval)
-	{
-		/* 
-		Things this method should do
-		1. Go through each pair of tupples in the unordered_map
-		2. find their P-value w/ the math below
-		3. create the Correlation struct w/ results
-		4. return Correlation
-		*/
-		
+	{		
 		// create the variables needed for the function
 		vector<Correlation> results;
 		string c1Name;
@@ -122,7 +99,7 @@ Steps still necessary for the program
 		unordered_map<string, vector<string>>::iterator p;
 		unordered_map<string, vector<string>>::iterator l;
 
-
+		
 		
 
 			for (p = data.catCol.begin(); p != data.catCol.end(); p++)
@@ -139,18 +116,19 @@ Steps still necessary for the program
 					vector<string> chiCols;
 					vector<int> chiColTot;
 
+
 					// Get the number of unique variables in column 1, and how often they occur
 
 					// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
 
-#pragma omp parallel for
+//#pragma omp parallel for schedule(dynamic,1000)
 					for (int i = 0; i < p->second.size(); i++)
 					{
 						bool breaker = true;
 
 						for (int j = 0; j <= chiCols.size(); j++)
 						{
-#pragma omp critical
+							//mtx.lock();
 
 							// on the first item, always push onto the vector
 
@@ -159,6 +137,7 @@ Steps still necessary for the program
 								chiCols.push_back(column1[i]);
 								chiColTot.push_back(1);
 								breaker = false;
+
 							}
 
 							// if the item is unique and you have finished comparing to all current variables, push onto the vector
@@ -175,7 +154,10 @@ Steps still necessary for the program
 								chiColTot[j]++;
 								breaker = false;
 							}
+							//mtx.unlock();
+
 						}
+
 					}
 
 					// same thing for the rows
@@ -183,14 +165,14 @@ Steps still necessary for the program
 					vector<int> chiRowTot;
 					
 
-#pragma omp parallel for
+//#pragma omp parallel for schedule(dynamic,10000000)
 					for (int i = 0; i < column2.size(); i++)
 					{
 						bool breaker = true;
 
 						for (int j = 0; j <= chiRows.size(); j++)
 						{
-#pragma omp critical
+//#pragma omp critical 
 							// on the first item, always push onto the vector
 
 							if (breaker && chiRows.size() == 0)
@@ -214,9 +196,9 @@ Steps still necessary for the program
 								breaker = false;
 
 							}
-							std::cout << "INNER " << j << " THREAD "<< omp_get_thread_num() <<endl;
+							//std::cout << "INNER " << j << " THREAD "<< omp_get_thread_num() <<endl;
 						}
-						std::cout << "OUTER " << i << " " << endl;
+						//std::cout << "OUTER " << i << " " << endl;
 					}
 
 				
@@ -230,6 +212,7 @@ Steps still necessary for the program
 
 					// go through and fill in the observed values. 
 					// parallelize
+#pragma omp for collapse(2) schedule(static,10000) //good to go
 					for (int i = 0; i < column2.size(); i++)
 					{
 						// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
@@ -254,6 +237,7 @@ Steps still necessary for the program
 					// find the expected value and chi value for each cell; add them to get the chi Crit value
 					float chiCrit = 0;
 					// parallelize
+//#pragma omp for collapse(2) schedule(dynamic) //need test
 					for (int i = 0; i < chiRows.size(); i++)
 					{
 						for (int j = 0; j < chiCols.size(); j++)
@@ -262,7 +246,7 @@ Steps still necessary for the program
 							float expected = ((float)chiRowTot[i] * (float)chiColTot[j]) / ((float)data.nrow - 1);
 
 							//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
-							chiCrit = pow(((float)chiSquare[i][j] - expected), 2) / expected;
+							chiCrit += pow(((float)chiSquare[i][j] - expected), 2) / expected;
 						}
 					}
 
@@ -314,10 +298,10 @@ int main()
 	
 	//get the file and pvalue from the user
 	std::cout << "Enter a file name: " << endl;
-	cin >> fileName;
+	std::cin >> fileName;
 	fileName = fileName + ".csv";
 	std::cout << "enter a p-value." << endl;
-	cin >> pval;
+	std::cin >> pval;
 	
 	// paralellize???
 	std::ifstream myFile(fileName);
@@ -396,7 +380,38 @@ int main()
 	return 0;
 }
 	
+// testing
 
+TEST_CASE("Given standard input", "[classic]")
+{
+	// create our custom input to test the standard input
+	Dataset data;
+	vector<string> col1{"cat", "cat", "cat", "cat","cat","cat","cat","cat","cat","cat",
+		"dog","dog","dog","dog","dog","dog","dog","dog","dog","dog","dog"};
+	vector<string> col2{"bird","bird","bird","bird","bird","fish","fish","fish","fish","fish",
+		"bird","bird","bird","bird","bird","bird","fish","fish","fish","fish","fish"};
+	unordered_map<string, vector<string>> entries;
+
+	for (int i = 0; i < col1.size(); i++)
+	{
+		entries["pet1"].push_back(col1[i]);
+	}
+	for (int i = 0; i < col2.size(); i++)
+	{
+		entries["pet2"].push_back(col2[i]);
+	}
+
+	data.ncol = 2;
+	data.nrow = 21;
+	data.catCol = entries;
+
+	SECTION("Testing standard input")
+	{
+		REQUIRE(getPValues(data, .05)[1].col_1_name == "pet1");
+		REQUIRE(getPValues(data, .05)[1].col_2_name == "pet2");
+		REQUIRE(getPValues(data, .05)[1].coeff == 1);
+	}
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
