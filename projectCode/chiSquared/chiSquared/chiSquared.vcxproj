@@ -152,7 +152,6 @@
     <ClCompile Include="chiSquared.cpp">
       <OpenMPSupport Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</OpenMPSupport>
     </ClCompile>
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\ChisquarePValueFinder\ChisquarePValueFinder\include\ChisquarePValueFinder.h" />
