@@ -289,17 +289,17 @@ int main(int argc, char* argv[])
 	
 	//get the file and pvalue from the user
 	std::cout << "Enter a file name: " << endl;
-	//std::cin >> fileName;
+	std::cin >> fileName;
 	fileName = fileName + ".csv";
 	std::cout << "enter a p-value." << endl;
-	//std::cin >> pval;
+	std::cin >> pval;
 	
 	// paralellize???
 	std::ifstream myFile(fileName);
 	std::string line, dataEntry;
 	string val;
 	
-	/*if (myFile.good())
+	if (myFile.good())
 	{
 		std::getline(myFile, line);
 
@@ -348,17 +348,17 @@ int main(int argc, char* argv[])
 
 		// get the results of the chi-square test by calling the getPValues method and storing the results in results
 		auto start = high_resolution_clock::now();
-		//results = getPValues(data, pval);
+		results = getPValues(data, pval);
 		auto stop = high_resolution_clock::now();
 		// display all results in console (for now)
-		//for (int i = 0; i < results.size(); i++)
-			//std::cout << "Column 1: " << results[i].col_1_name << "\nColumn 2: " << results[i].col_2_name << "\nCoefficient: " << results[i].coeff << endl;
+		for (int i = 0; i < results.size(); i++)
+			std::cout << "Column 1: " << results[i].col_1_name << "\nColumn 2: " << results[i].col_2_name << "\nCoefficient: " << results[i].coeff << endl;
 
 
 
 		auto duration = duration_cast<microseconds>(stop - start);
 		std::cout << "Time taken by the function: " << duration.count() << " microseconds" << endl;
-	}*/
+	}
 	
 	myFile.close();
 
