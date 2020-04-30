@@ -391,14 +391,15 @@ TEST_CASE("Given standard input", "[classic]")
 	data.ncol = 2;
 	data.nrow = 22;
 	data.catCol = entries;
+	float EPSILON = .001;
 
 	float coef = getPValues(data, .05)[0].coeff;
 
 	SECTION("Testing standard input")
 	{
-		REQUIRE(getPValues(data, .05)[0].col_1_name == "pet2");
-		REQUIRE(getPValues(data, .05)[0].col_2_name == "pet1");
-		REQUIRE(getPValues(data, .05)[0].coeff == (float)0.834996);
+		REQUIRE(getPValues(data, .05)[0].col_1_name == "pet1");
+		REQUIRE(getPValues(data, .05)[0].col_2_name == "pet2");
+		REQUIRE(fabs(getPValues(data, .05)[0].coeff - 0.8349955678) < EPSILON);
 	}
 }
 
