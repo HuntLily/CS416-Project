@@ -149,35 +149,41 @@ Steps still necessary for the program
 						std::cout << "test" << omp_get_thread_num;;
 
 						bool breaker = true;
+						bool newVar = false;
+						int temp = 0;
 
 						for (int j = 0; j <= chiCols.size(); j++)
 						{
 #pragma omp critical
-
 							// on the first item, always push onto the vector
-
 							if (breaker && chiCols.size() == 0)
 							{
-								chiCols.push_back(column1[i]);
+								temp = i;
 								chiColTot.push_back(1);
 								breaker = false;
+								newVar = true;
 							}
 
 							// if the item is unique and you have finished comparing to all current variables, push onto the vector
 							else if (breaker && (column1[i] != chiCols[j] && j == chiCols.size() - 1))
 							{
-								chiCols.push_back(column1[i]);
+								temp = i;
 								chiColTot.push_back(1);
 								breaker = false;
+								newVar = true;
 							}
 
 							// if you find a match, increase the count of that match
 							else if (breaker && (column1[i] == chiCols[j]))
 							{
-								chiColTot[j]++;
+								temp = j;
 								breaker = false;
 							}
 						}
+						if (newVar)
+							chiCols.push_back(column1[temp]);
+						else
+							chiColTot[temp]++;
 					}
 
 					// same thing for the rows
@@ -188,36 +194,41 @@ Steps still necessary for the program
 #pragma omp parallel for
 					for (int i = 0; i < column2.size(); i++)
 					{
+						int temp = 0;
 						bool breaker = true;
-
+						bool newVar = false;
 						for (int j = 0; j <= chiRows.size(); j++)
 						{
 #pragma omp critical
 							// on the first item, always push onto the vector
-
 							if (breaker && chiRows.size() == 0)
 							{
-								chiRows.push_back(column2[i]);
+								temp = i;
 								chiRowTot.push_back(1);
 								breaker = false;
+								newVar = true;
 							}
 
 							// if the item is unique and you have finished comparing to all current variables, push onto the vector
 							else if (breaker && column2[i] != chiRows[j] && j == chiRows.size() - 1)
 							{
-								chiRows.push_back(column2[i]);
+								temp = i;
 								chiRowTot.push_back(1);
 								breaker = false;
+								newVar = true;
 							}
 
 							else if (breaker && column2[i] == chiRows[j])
 							{
-								chiRowTot[j]++;
+								temp = j;
 								breaker = false;
-
+								newVar = true;
 							}
 							std::cout << "INNER " << j << " THREAD "<< omp_get_thread_num() <<endl;
 						}
+						if (newVar)
+							chiRows.push_back(column2[temp]);
+						chiRowTot[temp]++;
 						std::cout << "OUTER " << i << " " << endl;
 					}
 
