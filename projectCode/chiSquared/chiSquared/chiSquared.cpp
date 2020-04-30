@@ -15,9 +15,7 @@
 #include <typeinfo>
 #include <chrono>
 #include <thread>
-#include <mutex>
 
-mutex mtx;
 
 using namespace std;
 using namespace std::chrono;
@@ -325,10 +323,10 @@ int main()
 	
 	//get the file and pvalue from the user
 	std::cout << "Enter a file name: " << endl;
-	cin >> fileName;
+	std::cin >> fileName;
 	fileName = fileName + ".csv";
 	std::cout << "enter a p-value." << endl;
-	cin >> pval;
+	std::cin >> pval;
 	
 	// paralellize???
 	std::ifstream myFile(fileName);
