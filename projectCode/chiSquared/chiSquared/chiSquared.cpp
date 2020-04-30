@@ -14,8 +14,10 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <chrono>
+#include <thread>
+#include <mutex>
 
-
+mutex mtx;
 
 using namespace std;
 using namespace std::chrono;
@@ -104,6 +106,8 @@ Steps still necessary for the program
 	// Sean's slightly better second attempt at the PValue bogus
 	std:: vector<Correlation> getPValues(Dataset data, float pval)
 	{
+
+
 		/* 
 		Things this method should do
 		1. Go through each pair of tupples in the unordered_map
@@ -122,7 +126,7 @@ Steps still necessary for the program
 		unordered_map<string, vector<string>>::iterator p;
 		unordered_map<string, vector<string>>::iterator l;
 
-
+		
 		
 
 			for (p = data.catCol.begin(); p != data.catCol.end(); p++)
@@ -139,18 +143,19 @@ Steps still necessary for the program
 					vector<string> chiCols;
 					vector<int> chiColTot;
 
+
 					// Get the number of unique variables in column 1, and how often they occur
 
 					// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
 
-//#pragma omp parallel for
+//#pragma omp parallel for schedule(dynamic,1000)
 					for (int i = 0; i < p->second.size(); i++)
 					{
 						bool breaker = true;
 
 						for (int j = 0; j <= chiCols.size(); j++)
 						{
-//#pragma omp critical
+							//mtx.lock();
 
 							// on the first item, always push onto the vector
 
@@ -159,6 +164,7 @@ Steps still necessary for the program
 								chiCols.push_back(column1[i]);
 								chiColTot.push_back(1);
 								breaker = false;
+
 							}
 
 							// if the item is unique and you have finished comparing to all current variables, push onto the vector
@@ -175,7 +181,10 @@ Steps still necessary for the program
 								chiColTot[j]++;
 								breaker = false;
 							}
+							//mtx.unlock();
+
 						}
+
 					}
 
 					// same thing for the rows
@@ -183,14 +192,14 @@ Steps still necessary for the program
 					vector<int> chiRowTot;
 					
 
-//#pragma omp parallel for
+//#pragma omp parallel for schedule(dynamic,10000000)
 					for (int i = 0; i < column2.size(); i++)
 					{
 						bool breaker = true;
 
 						for (int j = 0; j <= chiRows.size(); j++)
 						{
-//#pragma omp critical
+//#pragma omp critical 
 							// on the first item, always push onto the vector
 
 							if (breaker && chiRows.size() == 0)
@@ -230,7 +239,7 @@ Steps still necessary for the program
 
 					// go through and fill in the observed values. 
 					// parallelize
-#pragma omp simd collapse(2)
+#pragma omp for collapse(2) schedule(static,10000) //good to go
 					for (int i = 0; i < column2.size(); i++)
 					{
 						// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
@@ -255,7 +264,7 @@ Steps still necessary for the program
 					// find the expected value and chi value for each cell; add them to get the chi Crit value
 					float chiCrit = 0;
 					// parallelize
-#pragma omp simd collapse(2)
+//#pragma omp for collapse(2) schedule(dynamic) //need test
 					for (int i = 0; i < chiRows.size(); i++)
 					{
 						for (int j = 0; j < chiCols.size(); j++)
