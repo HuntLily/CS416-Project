@@ -17,7 +17,7 @@ C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chi
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(354,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(382,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(386,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(397,3): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(398,3): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(399,3): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(400,3): warning C4305: 'argument': truncation from 'double' to 'float'
   chiSquared.vcxproj -> C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe

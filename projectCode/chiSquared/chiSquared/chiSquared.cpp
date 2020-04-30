@@ -379,11 +379,11 @@ TEST_CASE("Given standard input", "[classic]")
 		"bird","bird","bird","bird","bird","bird","fish","fish","fish","fish","fish"};
 	unordered_map<string, vector<string>> entries;
 
-	for (int i = 0; i < col1.size(); i++)
+	for (int i = 0; i < col1.size()-1; i++)
 	{
 		entries["pet1"].push_back(col1[i]);
 	}
-	for (int i = 0; i < col2.size(); i++)
+	for (int i = 0; i < col2.size()-1; i++)
 	{
 		entries["pet2"].push_back(col2[i]);
 	}
@@ -392,11 +392,12 @@ TEST_CASE("Given standard input", "[classic]")
 	data.nrow = 21;
 	data.catCol = entries;
 
+
 	SECTION("Testing standard input")
 	{
-		REQUIRE(getPValues(data, .05)[1].col_1_name == "pet1");
-		REQUIRE(getPValues(data, .05)[1].col_2_name == "pet2");
-		REQUIRE(getPValues(data, .05)[1].coeff == 1);
+		REQUIRE(getPValues(data, .05)[0].col_1_name == "pet1");
+		REQUIRE(getPValues(data, .05)[0].col_2_name == "pet2");
+		REQUIRE(getPValues(data, .05)[0].coeff == 1);
 	}
 }
 
