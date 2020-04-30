@@ -230,7 +230,6 @@ Steps still necessary for the program
 
 					// go through and fill in the observed values. 
 					// parallelize
-
 #pragma omp simd collapse(2)
 					for (int i = 0; i < column2.size(); i++)
 					{
@@ -240,17 +239,15 @@ Steps still necessary for the program
 							if (column2[i] == chiRows[j])
 							{
 								// once you've found a match, find column1[i]'s match in chiCols
-									for (int k = 0; k < chiCols.size(); k++)
+								for (int k = 0; k < chiCols.size(); k++)
+								{
+									if (column1[i] == chiCols[k])
 									{
-										if (column1[i] == chiCols[k])
-										{
-											// when you find a match for column1, increment the 2d array according to which variables it matches
-											//chiSquare[j][k]++;
-											chiSquare[j][k]++;
-										}
+										// when you find a match for column1, increment the 2d array according to which variables it matches
+										//chiSquare[j][k]++;
+										chiSquare[j][k]++;
 									}
-								
-					
+								}
 							}
 						}
 					}
@@ -267,7 +264,7 @@ Steps still necessary for the program
 							float expected = ((float)chiRowTot[i] * (float)chiColTot[j]) / ((float)data.nrow - 1);
 
 							//chi value = (observed - expected)^2 / expected value. chiChrit = sum of all chi values
-							chiCrit = pow(((float)chiSquare[i][j] - expected), 2) / expected;
+							chiCrit += pow(((float)chiSquare[i][j] - expected), 2) / expected;
 						}
 					}
 
