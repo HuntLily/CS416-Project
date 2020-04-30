@@ -1,7 +1,7 @@
 // chiSquared.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // 
 
-#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_RUNNER
 #include <iostream>
 #include <tgmath.h>
 #include <math.h>
@@ -278,18 +278,8 @@ using namespace std::chrono;
 	}
 
 
-int main()
+int main(int argc, char* argv[])
 {
-	/*
-	the main() function should:
-	1. find the number of columns and rows
-	2. make every column of data into a unordered_map (either cat or num)
-		2.1 the keys for the columns are strings, name of column, must be unique
-		2.2 the values are either a string or floating point vector (column data)
-	3. call another function that finds the p-value when passed the dataset & threshold
-	4. main then displays/whatever the p-values as output
-	*/
-
 	double pval = 0.5;
 	int ncol = 0;
 	int nrow = 0;
@@ -370,15 +360,11 @@ int main()
 		std::cout << "Time taken by the function: " << duration.count() << " microseconds" << endl;
 	}
 	
-	//time our method 
-	//
-	//
-
-	
-
 	myFile.close();
 
-	return 0;
+	int result = Catch::Session().run(argc, argv);
+
+	return result;
 }
 	
 // testing
