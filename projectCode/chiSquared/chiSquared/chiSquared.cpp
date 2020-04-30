@@ -15,6 +15,7 @@
 #include <typeinfo>
 #include <chrono>
 #include <thread>
+#include "catch.hpp"
 
 
 using namespace std;
@@ -33,22 +34,6 @@ using namespace std::chrono;
 		string col_2_name;
 		float coeff;
 	};
-	
-	
-	
-
-/*
-Steps still necessary for the program
-1. Convert the CSV file data to a dataSet w/ Unmapped things [done]
-2. loop through all combinations of columns [done]
-	1. find the Degrees of Freedom [done]
-	2. Call getPValues() [done]
-	3. Call the library function for chi val [done]
-3. store the p-values [done]
-4. display/return the p-values above the threshold. [done]
-5. parallelize, -O3 gcc, maybe SIMD instructions
-6. find and display our run time [done]
-*/
 
 	// the chi-square library because it wouldn't work and there was nothing else in the readme indicating what to do and I am tired
 	static double igf(double S, double Z)
@@ -103,17 +88,7 @@ Steps still necessary for the program
 
 	// Sean's slightly better second attempt at the PValue bogus
 	std:: vector<Correlation> getPValues(Dataset data, float pval)
-	{
-
-
-		/* 
-		Things this method should do
-		1. Go through each pair of tupples in the unordered_map
-		2. find their P-value w/ the math below
-		3. create the Correlation struct w/ results
-		4. return Correlation
-		*/
-		
+	{		
 		// create the variables needed for the function
 		vector<Correlation> results;
 		string c1Name;
@@ -405,7 +380,38 @@ int main()
 	return 0;
 }
 	
+// testing
 
+TEST_CASE("Given standard input", "[classic]")
+{
+	// create our custom input to test the standard input
+	Dataset data;
+	vector<string> col1{"cat", "cat", "cat", "cat","cat","cat","cat","cat","cat","cat",
+		"dog","dog","dog","dog","dog","dog","dog","dog","dog","dog","dog"};
+	vector<string> col2{"bird","bird","bird","bird","bird","fish","fish","fish","fish","fish",
+		"bird","bird","bird","bird","bird","bird","fish","fish","fish","fish","fish"};
+	unordered_map<string, vector<string>> entries;
+
+	for (int i = 0; i < col1.size(); i++)
+	{
+		entries["pet1"].push_back(col1[i]);
+	}
+	for (int i = 0; i < col2.size(); i++)
+	{
+		entries["pet2"].push_back(col2[i]);
+	}
+
+	data.ncol = 2;
+	data.nrow = 21;
+	data.catCol = entries;
+
+	SECTION("Testing standard input")
+	{
+		REQUIRE(getPValues(data, .05)[1].col_1_name == "pet1");
+		REQUIRE(getPValues(data, .05)[1].col_2_name == "pet2");
+		REQUIRE(getPValues(data, .05)[1].coeff == 1);
+	}
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
