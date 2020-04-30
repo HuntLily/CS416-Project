@@ -1,17 +1,17 @@
 ﻿cl : command line warning D9035: option 'o' has been deprecated and will be removed in a future release
   chiSquared.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\tgmath.h(27): warning UCRT4000: The Universal CRT implementation of tgmath.h does not conform to the C99 standard. Functionality equivalent to the type-generic functions provided by tgmath.h is available in <ctgmath> when compiling as C++. If compiling in C++17 mode or higher (/std:c++17), this header will automatically include <ctgmath> instead. You can define _CRT_SILENCE_NONCONFORMING_TGMATH_H to acknowledge that you have received this warning.
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(147,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(150,24): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(181,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(183,24): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(212,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(217,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(220,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(225,26): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(241,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(243,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(257,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(359,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(362,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(147,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(151,25): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(182,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(184,25): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(213,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(218,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(221,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(226,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(242,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(244,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(258,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(360,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(363,21): warning C4018: '<': signed/unsigned mismatch
   chiSquared.vcxproj -> C:\Users\wills\Documents\GitHub\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe
