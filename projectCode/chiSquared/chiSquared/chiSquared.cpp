@@ -16,6 +16,7 @@
 #include <chrono>
 #include <thread>
 #include "catch.hpp"
+#define CATCH_CONFIG_MAIN
 
 
 using namespace std;
