@@ -143,14 +143,14 @@ Steps still necessary for the program
 
 					// want to parallelize, maybe can't if 2 threads find the same unique value simultaneously?
 
-#pragma omp parallel for
+//#pragma omp parallel for
 					for (int i = 0; i < p->second.size(); i++)
 					{
 						bool breaker = true;
 
 						for (int j = 0; j <= chiCols.size(); j++)
 						{
-#pragma omp critical
+//#pragma omp critical
 
 							// on the first item, always push onto the vector
 
@@ -183,14 +183,14 @@ Steps still necessary for the program
 					vector<int> chiRowTot;
 					
 
-#pragma omp parallel for
+//#pragma omp parallel for
 					for (int i = 0; i < column2.size(); i++)
 					{
 						bool breaker = true;
 
 						for (int j = 0; j <= chiRows.size(); j++)
 						{
-#pragma omp critical
+//#pragma omp critical
 							// on the first item, always push onto the vector
 
 							if (breaker && chiRows.size() == 0)
@@ -214,9 +214,9 @@ Steps still necessary for the program
 								breaker = false;
 
 							}
-							std::cout << "INNER " << j << " THREAD "<< omp_get_thread_num() <<endl;
+							//std::cout << "INNER " << j << " THREAD "<< omp_get_thread_num() <<endl;
 						}
-						std::cout << "OUTER " << i << " " << endl;
+						//std::cout << "OUTER " << i << " " << endl;
 					}
 
 				
@@ -230,6 +230,8 @@ Steps still necessary for the program
 
 					// go through and fill in the observed values. 
 					// parallelize
+
+#pragma omp simd collapse(2)
 					for (int i = 0; i < column2.size(); i++)
 					{
 						// this loop goes through each element in column 2 and compares it to each variable in chiRows until it finds a match
@@ -238,15 +240,17 @@ Steps still necessary for the program
 							if (column2[i] == chiRows[j])
 							{
 								// once you've found a match, find column1[i]'s match in chiCols
-								for (int k = 0; k < chiCols.size(); k++)
-								{
-									if (column1[i] == chiCols[k])
+									for (int k = 0; k < chiCols.size(); k++)
 									{
-										// when you find a match for column1, increment the 2d array according to which variables it matches
-										//chiSquare[j][k]++;
-										chiSquare[j][k]++;
+										if (column1[i] == chiCols[k])
+										{
+											// when you find a match for column1, increment the 2d array according to which variables it matches
+											//chiSquare[j][k]++;
+											chiSquare[j][k]++;
+										}
 									}
-								}
+								
+					
 							}
 						}
 					}
@@ -254,6 +258,7 @@ Steps still necessary for the program
 					// find the expected value and chi value for each cell; add them to get the chi Crit value
 					float chiCrit = 0;
 					// parallelize
+#pragma omp simd collapse(2)
 					for (int i = 0; i < chiRows.size(); i++)
 					{
 						for (int j = 0; j < chiCols.size(); j++)
