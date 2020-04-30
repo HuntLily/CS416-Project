@@ -5,13 +5,13 @@ C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chi
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(151,25): warning C4018: '<=': signed/unsigned mismatch
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(187,24): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(191,25): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(228,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(233,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(236,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(241,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(257,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(259,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(273,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(376,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(379,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(226,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(231,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(234,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(239,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(255,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(257,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(271,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(374,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\chiSquared\chiSquared.cpp(377,21): warning C4018: '<': signed/unsigned mismatch
   chiSquared.vcxproj -> C:\Users\Sean_3\Source\Repos\CS416-Project\projectCode\chiSquared\Debug\chiSquared.exe
